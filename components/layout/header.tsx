@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/navigation-menu"
 import { useUserMeStore } from "@/lib/authentification/store"
 import { navItems } from "@/lib/navigation"
-import Image from "next/image"
 import Link from "next/link"
 import { useEffect } from "react"
 import { ModeToggle } from "../theme-toogle-button"
@@ -23,14 +22,7 @@ export const Header = () => {
   }, [])
 
   return (
-    <header className="flex flex-wrap gap-2 justify-evenly py-2 bg-primary-foreground">
-      <Image
-        src="/favicon.ico"
-        alt="logo"
-        width={40}
-        height={40}
-        className="ml-2"
-      />
+    <header className="flex flex-wrap gap-2 justify-evenly py-2">
       <NavigationMenu>
         <NavigationMenuList>
           {Object.values(navItems)
