@@ -7,7 +7,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Parent list maker",
+  title: "Parents List Maker",
   description:
     "A user interface for my fastapi in python to manage a list of parents.",
 };
