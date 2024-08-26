@@ -57,7 +57,7 @@ const CardTitleH1 = React.forwardRef<
     {...props}
   />
 ))
-CardTitle.displayName = "CardTitleH1"
+CardTitleH1.displayName = "CardTitleH1"
 
 const CardDescription = React.forwardRef<
   HTMLParagraphElement,
