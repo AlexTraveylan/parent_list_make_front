@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import { UserMe } from "./schema"
+import { UserMe } from "./schemas"
 import { authService } from "./service"
 
 type userMeStoreType = {

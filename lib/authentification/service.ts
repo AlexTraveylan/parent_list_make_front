@@ -5,7 +5,7 @@ import {
   authTokenSchema,
   UserMe,
   userMeSchemaOut,
-} from "./schema"
+} from "./schemas"
 import { extractAuthTokenFromLocalStorage } from "./token"
 
 class AuthentificationService {

@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { InputEye } from "@/components/ui/input-password-eye"
-import { AuthSchemaIn, authSchemaIn } from "@/lib/authentification/schema"
+import { AuthSchemaIn, authSchemaIn } from "@/lib/authentification/schemas"
 import { authService } from "@/lib/authentification/service"
 import { useUserMeStore } from "@/lib/authentification/store"
 import { navItems } from "@/lib/navigation"
