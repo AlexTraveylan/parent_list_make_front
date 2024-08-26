@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { EmailRecovery, emailRecoverySchema } from "@/lib/email/schema"
+import { EmailRecovery, emailRecoverySchema } from "@/lib/email/schemas"
 import { emailService } from "@/lib/email/service"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FC, useState } from "react"

@@ -1,6 +1,6 @@
 import { addEmailRoute, contactUserRoute } from "../api-routes"
 import { extractAuthTokenFromLocalStorage } from "../authentification/token"
-import { EmailConfirmationToken, emailConfirmationTokenSchema } from "./schema"
+import { EmailConfirmationToken, emailConfirmationTokenSchema } from "./schemas"
 
 class EmailService {
   async sendResetPasswordRequest(email: string): Promise<void> {
