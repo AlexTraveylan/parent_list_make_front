@@ -4,7 +4,9 @@ type NavigationItem = {
   authRequired: boolean
 }
 
-export const navItems: Record<string, NavigationItem> = {
+type NavItemPossibilities = "Home" | "Application" | "MyAccount"
+
+export const navItems: Record<NavItemPossibilities, NavigationItem> = {
   Home: { displayName: "Accueil", href: "/", authRequired: false },
   Application: {
     displayName: "Application",
@@ -18,7 +20,9 @@ export const navItems: Record<string, NavigationItem> = {
   },
 }
 
-export const authNavItems: Record<string, NavigationItem> = {
+type AuthNavItemPossibilities = "login" | "register" | "forgotPassword"
+
+export const authNavItems: Record<AuthNavItemPossibilities, NavigationItem> = {
   login: { displayName: "Connexion", href: "/auth/login", authRequired: false },
   register: {
     displayName: "Inscription",

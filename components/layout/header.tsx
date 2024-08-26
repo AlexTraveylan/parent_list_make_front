@@ -12,6 +12,7 @@ import { navItems } from "@/lib/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect } from "react"
+import { ModeToggle } from "../theme-toogle-button"
 import { AuthButton } from "./auth-button"
 
 export const Header = () => {
@@ -56,6 +57,7 @@ export const Header = () => {
           </span>
         )}
         <AuthButton />
+        <ModeToggle />
       </div>
     </header>
   )

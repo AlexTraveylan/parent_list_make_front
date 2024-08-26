@@ -6,7 +6,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
+  CardTitleH1,
 } from "@/components/ui/card"
 import {
   Form,
@@ -53,7 +53,9 @@ export default function LoginPage() {
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
-        <CardTitle className="text-2xl">{"Formulaire de connexion"}</CardTitle>
+        <CardTitleH1 className="text-2xl">
+          {"Formulaire de connexion"}
+        </CardTitleH1>
         <CardDescription>
           {"Connectez-vous pour accéder à votre compte"}
         </CardDescription>
