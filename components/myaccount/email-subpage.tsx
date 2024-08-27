@@ -1,5 +1,7 @@
 import { authService } from "@/lib/authentification/service"
+import { navItems } from "@/lib/navigation"
 import { useQuery } from "@tanstack/react-query"
+import Link from "next/link"
 import { Skeleton } from "../ui/skeleton"
 import { Completion, Incompletion } from "./completion-incompletion"
 
@@ -26,6 +28,16 @@ export function EmailSubPage() {
   }
 
   return (
-    <Incompletion phrase={"Aucun email confirmé enregistré (facultatif)"} />
+    <div>
+      <Incompletion phrase={"Aucun email confirmé enregistré (facultatif)"} />
+      <div className="flex justify-end mt-2">
+        <Link
+          href={navItems["MyAccount"].href + "/confirm-email"}
+          className="text-sm text-foreground/80 hover:text-foreground"
+        >
+          Changer d'avis et confirmer son email
+        </Link>
+      </div>
+    </div>
   )
 }

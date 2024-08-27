@@ -1,12 +1,12 @@
 import { z } from "zod"
 
-export const emailRecoverySchema = z.object({
+export const emailSchema = z.object({
   email: z.string().email({
     message: "Veuillez entrer une adresse email valide",
   }),
 })
 
-export type EmailRecovery = z.infer<typeof emailRecoverySchema>
+export type Email = z.infer<typeof emailSchema>
 
 export const emailConfirmationTokenSchema = z.object({
   id: z.number(),

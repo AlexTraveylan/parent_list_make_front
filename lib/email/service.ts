@@ -12,6 +12,7 @@ class EmailService {
     const authToken = extractAuthTokenFromLocalStorage()
     const headers = new Headers()
     headers.append("Authorization", authToken)
+    headers.append("Content-Type", "application/json")
 
     try {
       const response = await fetch(addEmailRoute, {
@@ -23,7 +24,8 @@ class EmailService {
       })
 
       if (!response.ok) {
-        throw new Error(`Echec de la connexion ${response.status}`)
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
       }
 
       const responseJson = await response.json()
@@ -40,6 +42,7 @@ class EmailService {
     const authToken = extractAuthTokenFromLocalStorage()
     const headers = new Headers()
     headers.append("Authorization", authToken)
+    headers.append("Content-Type", "application/json")
 
     try {
       const response = await fetch(`${contactUserRoute}${userId}`, {
@@ -51,7 +54,8 @@ class EmailService {
       })
 
       if (!response.ok) {
-        throw new Error(`Echec de la connexion ${response.status}`)
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
       }
     } catch (error) {
       throw error

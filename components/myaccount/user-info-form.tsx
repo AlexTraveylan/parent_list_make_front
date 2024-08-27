@@ -98,7 +98,7 @@ const UserInfoForm: React.FC = () => {
               </FormControl>
               <FormDescription>
                 {
-                  "Votre email n'apparaîtra pas aux autres parents, il sera stocker de manière sécurisée. Avec un email valide, vous pourrez créer une liste et être contacté par les autres parents par l'intermédiare de l'application."
+                  "Votre email n'apparaîtra pas aux autres parents, il sera stocké de manière sécurisée. Avec un email valide, vous pourrez créer une liste et être contacté par les autres parents par l'intermédiaire de l'application."
                 }
               </FormDescription>
               <FormMessage />
