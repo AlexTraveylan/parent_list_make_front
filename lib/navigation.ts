@@ -9,7 +9,7 @@ type NavItemPossibilities = "Home" | "Application" | "MyAccount"
 export const navItems: Record<NavItemPossibilities, NavigationItem> = {
   Home: { displayName: "Accueil", href: "/", authRequired: false },
   Application: {
-    displayName: "Application",
+    displayName: "Mes listes",
     href: "/application",
     authRequired: true,
   },
