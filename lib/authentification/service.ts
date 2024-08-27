@@ -1,9 +1,16 @@
-import { loginRoute, registerRoute, userMeRoute } from "../api-routes"
+import {
+  loginRoute,
+  registerRoute,
+  userMeDetailsRoute,
+  userMeRoute,
+} from "../api-routes"
 import {
   AuthSchemaIn,
   AuthToken,
   authTokenSchema,
   UserMe,
+  UserMeDetails,
+  userMeDetailsSchema,
   userMeSchemaOut,
 } from "./schemas"
 import { extractAuthTokenFromLocalStorage } from "./token"
@@ -88,6 +95,30 @@ class AuthentificationService {
       const userMe = userMeSchemaOut.parse(responseJson)
 
       return userMe
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async getUserMeDetails(): Promise<UserMeDetails> {
+    const authToken = extractAuthTokenFromLocalStorage()
+    const headers = new Headers()
+    headers.append("Authorization", authToken)
+
+    try {
+      const response = await fetch(userMeDetailsRoute, {
+        method: "GET",
+        headers: headers,
+      })
+
+      if (!response.ok) {
+        throw new Error(`Echec de la connexion ${response.status}`)
+      }
+
+      const responseJson = await response.json()
+      const userMeDetails = userMeDetailsSchema.parse(responseJson)
+
+      return userMeDetails
     } catch (error) {
       throw error
     }

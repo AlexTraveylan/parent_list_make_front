@@ -1,6 +1,6 @@
 "use client"
 
-import Completion from "@/components/myaccount/information-ok"
+import { Completion } from "@/components/myaccount/completion-incompletion"
 import UserInfoForm from "@/components/myaccount/user-info-form"
 import { Skeleton } from "@/components/ui/skeleton"
 import { userInformationService } from "@/lib/user-information/service"
@@ -22,7 +22,7 @@ export function UserInfoSubPage() {
   }
 
   if (query.isError) {
-    return <div>Erreur</div>
+    throw new Error("Erreur")
   }
 
   return (

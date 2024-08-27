@@ -14,7 +14,7 @@ import {
   CardTitle,
 } from "../ui/card"
 import { Skeleton } from "../ui/skeleton"
-import Completion from "./information-ok"
+import { Completion, Incompletion } from "./completion-incompletion"
 
 export function SchoolsSubPage() {
   const [isJoinFormOpen, setIsJoinFormOpen] = useState(false)
@@ -63,7 +63,7 @@ export function SchoolsSubPage() {
           </div>
         </>
       ) : (
-        <>Rejoint une école pour continuer</>
+        <Incompletion phrase={"Aucune école rejoint"} />
       )}
       <h2>
         {query.data && query.data.length > 0

@@ -21,3 +21,14 @@ export const userMeSchemaOut = z.object({
 })
 
 export type UserMe = z.infer<typeof userMeSchemaOut>
+
+export const userMeDetailsSchema = z.object({
+  id: z.number(),
+  username: z.string(),
+  email: z.union([z.string(), z.null()]),
+  is_email_confirmed: z.boolean(),
+  parents_list_ids: z.array(z.number()),
+  school_ids: z.array(z.number()),
+})
+
+export type UserMeDetails = z.infer<typeof userMeDetailsSchema>

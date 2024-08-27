@@ -6,7 +6,8 @@ const url =
 // Auth routes
 export const loginRoute = url + "/token"
 export const registerRoute = url + "/register"
-export const userMeRoute = url + "/users/me"
+export const userMeRoute = url + "/users/me/"
+export const userMeDetailsRoute = url + "/users/me/details/"
 
 // Email routes
 const emailExt = "/confirmation-email/"
