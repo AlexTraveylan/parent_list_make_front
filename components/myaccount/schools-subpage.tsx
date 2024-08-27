@@ -63,17 +63,17 @@ export function SchoolsSubPage() {
           </div>
         </>
       ) : (
-        <Incompletion phrase={"Aucune école rejoint"} />
+        <Incompletion phrase={"Aucune école rejointe"} />
       )}
       <h2>
         {query.data && query.data.length > 0
-          ? "Rejoins une autre école (facultatif)"
+          ? "Rejoint une autre école (facultatif)"
           : "Rejoint une école"}
       </h2>
       <div className="flex gap-4 justify-center flex-wrap">
         {!isCreatingFormOpen && (
           <Button onClick={() => setIsJoinFormOpen(!isJoinFormOpen)}>
-            {isJoinFormOpen ? "Fermer" : "Rejoins une école déjà existante"}
+            {isJoinFormOpen ? "Fermer" : "Rejoint une école déjà existante"}
           </Button>
         )}
         {!isJoinFormOpen && (

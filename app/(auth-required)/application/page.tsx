@@ -31,12 +31,13 @@ export default function ApplicationPage() {
 
   if (query.isError || !query.data || query.data.school_ids.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
-        <Card className="w-[350px]">
+      <div className="flex items-center justify-center my-5">
+        <Card className="min-w-sm">
           <CardHeader>
             <CardTitle>Complétez d'abord votre profil</CardTitle>
             <CardDescription>
-              Pour accéder à l'application, vous devez compléter votre profil
+              Complétez les informations manquantes de votre profil pour accéder
+              aux listes.
             </CardDescription>
           </CardHeader>
           <CardContent>
