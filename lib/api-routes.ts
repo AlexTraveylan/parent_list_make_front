@@ -9,29 +9,29 @@ export const registerRoute = url + "/register"
 export const userMeRoute = url + "/users/me"
 
 // Email routes
-const emailExt = "confirmation-email/"
+const emailExt = "/confirmation-email/"
 
 export const addEmailRoute = url + emailExt
 export const contactUserRoute = url + emailExt + "contact-user/"
 
 // User Information routes
-const userInfoExt = "user-informations/"
+const userInfoExt = "/user-informations/"
 export const userInfoRoute = url + userInfoExt
 
 // School routes
-const schoolExt = "schools/"
+const schoolExt = "/schools/"
 export const schoolRoute = url + schoolExt
 export const joinSchoolRoute = url + schoolExt + "join/"
 
 // Parents lists routes
-const parentListExt = "parents-lists/"
+const parentListExt = "/parents-lists/"
 export const parentListRoute = url + parentListExt
 export const joinParentListRoute = url + parentListExt + "join/"
 export const leaveParentListRoute = url + parentListExt + "leave/"
 export const acceptParentListRoute = url + parentListExt + "accept/"
 
 // links routes
-const linkExt = "links/"
+const linkExt = "/links/"
 export const getConfirmedParentsRoute = url + linkExt + "confirmed/"
 export const getWaitingParentsRoute = url + linkExt + "waiting/"
 export const upParentRoute = url + linkExt + "up/"

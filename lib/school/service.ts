@@ -75,3 +75,5 @@ class SchoolService {
     }
   }
 }
+
+export const schoolService = new SchoolService()

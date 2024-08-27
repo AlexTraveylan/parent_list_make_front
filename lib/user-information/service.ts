@@ -8,11 +8,12 @@ import {
   userInfoShortSchema,
 } from "./schemas"
 
-export class UserInformationService {
+class UserInformationService {
   async createUserInfo(userInfo: UserInfoIn): Promise<UserInfoOut> {
     const authToken = extractAuthTokenFromLocalStorage()
     const headers = new Headers()
     headers.append("Authorization", authToken)
+    headers.append("Content-Type", "application/json")
 
     try {
       const response = await fetch(userInfoRoute, {
@@ -22,9 +23,8 @@ export class UserInformationService {
       })
 
       if (!response.ok) {
-        throw new Error(
-          `Echec de la creation des informations utilisateur ${response.status}`
-        )
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
       }
 
       const responseJson = await response.json()
@@ -62,3 +62,5 @@ export class UserInformationService {
     }
   }
 }
+
+export const userInformationService = new UserInformationService()
