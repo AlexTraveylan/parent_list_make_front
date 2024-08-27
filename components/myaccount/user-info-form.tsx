@@ -14,11 +14,14 @@ import { Input } from "@/components/ui/input"
 import { UserInfoIn, userInfoSchemaIn } from "@/lib/user-information/schemas"
 import { userInformationService } from "@/lib/user-information/service"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import React from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 const UserInfoForm: React.FC = () => {
+  const queryClient = useQueryClient()
+
   const form = useForm<UserInfoIn>({
     resolver: zodResolver(userInfoSchemaIn),
     defaultValues: {
@@ -28,17 +31,23 @@ const UserInfoForm: React.FC = () => {
     },
   })
 
+  const mutation = useMutation({
+    mutationFn: userInformationService.createUserInfo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userInfo"] })
+      toast.success("Informations enregistrées avec succès")
+    },
+    onError: (error) => {
+      toast.error(String(error))
+    },
+  })
+
   async function onSubmit(formdata: UserInfoIn) {
     if (formdata.email === "") {
       formdata.email = null
     }
 
-    try {
-      await userInformationService.createUserInfo(formdata)
-      toast.success("Votre information a bien été créée")
-    } catch (error) {
-      toast.error(String(error))
-    }
+    mutation.mutate(formdata)
   }
 
   return (

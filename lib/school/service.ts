@@ -1,4 +1,4 @@
-import { joinSchoolRoute, schoolRoute } from "../api-routes"
+import { joinSchoolRoute, schoolRoute, userSchoolRoute } from "../api-routes"
 import { extractAuthTokenFromLocalStorage } from "../authentification/token"
 import { School, schoolSchema, SchoolShemaIn } from "./schemas"
 
@@ -14,7 +14,8 @@ class SchoolService {
       })
 
       if (!response.ok) {
-        throw new Error(`Echec de la connexion ${response.status}`)
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
       }
 
       const responseJson = await response.json()
@@ -30,6 +31,7 @@ class SchoolService {
     const authToken = extractAuthTokenFromLocalStorage()
     const headers = new Headers()
     headers.append("Authorization", authToken)
+    headers.append("Content-Type", "application/json")
 
     try {
       const response = await fetch(schoolRoute, {
@@ -39,7 +41,8 @@ class SchoolService {
       })
 
       if (!response.ok) {
-        throw new Error(`Echec de la connexion ${response.status}`)
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
       }
 
       const responseJson = await response.json()
@@ -63,13 +66,39 @@ class SchoolService {
       })
 
       if (!response.ok) {
-        throw new Error(`Echec de la connexion ${response.status}`)
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
       }
 
       const responseJson = await response.json()
       const createdSchool = schoolSchema.parse(responseJson)
 
       return createdSchool
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async getUserSchools(): Promise<School[]> {
+    const authToken = extractAuthTokenFromLocalStorage()
+    const headers = new Headers()
+    headers.append("Authorization", authToken)
+
+    try {
+      const response = await fetch(userSchoolRoute, {
+        method: "GET",
+        headers: headers,
+      })
+
+      if (!response.ok) {
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
+      }
+
+      const responseJson = await response.json()
+      const schools = schoolSchema.array().parse(responseJson)
+
+      return schools
     } catch (error) {
       throw error
     }
