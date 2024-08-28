@@ -5,6 +5,7 @@ import {
   makeAdminRoute,
   upParentRoute,
 } from "../api-routes"
+import { extractAuthTokenFromLocalStorage } from "../authentification/token"
 import { ParentListLink, parentListLinkSchema } from "./schema"
 
 class LinksService {
@@ -65,14 +66,16 @@ class LinksService {
     parentListId: number,
     userId: number
   ): Promise<void> {
+    const authToken = extractAuthTokenFromLocalStorage()
+    const headers = new Headers()
+    headers.append("Authorization", authToken)
+
     try {
       const response = await fetch(
         `${upParentRoute}${parentListId}/${userId}`,
         {
           method: "PATCH",
-          headers: {
-            Accept: "application/json",
-          },
+          headers: headers,
         }
       )
 
@@ -89,14 +92,16 @@ class LinksService {
     parentListId: number,
     userId: number
   ): Promise<void> {
+    const authToken = extractAuthTokenFromLocalStorage()
+    const headers = new Headers()
+    headers.append("Authorization", authToken)
+
     try {
       const response = await fetch(
         `${downParentRoute}${parentListId}/${userId}`,
         {
           method: "PATCH",
-          headers: {
-            Accept: "application/json",
-          },
+          headers: headers,
         }
       )
 
@@ -113,14 +118,16 @@ class LinksService {
     parentListId: number,
     userId: number
   ): Promise<void> {
+    const authToken = extractAuthTokenFromLocalStorage()
+    const headers = new Headers()
+    headers.append("Authorization", authToken)
+
     try {
       const response = await fetch(
         `${makeAdminRoute}${parentListId}/${userId}`,
         {
           method: "PATCH",
-          headers: {
-            Accept: "application/json",
-          },
+          headers: headers,
         }
       )
 
@@ -133,3 +140,5 @@ class LinksService {
     }
   }
 }
+
+export const linksService = new LinksService()

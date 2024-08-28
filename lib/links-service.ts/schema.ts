@@ -1,6 +1,7 @@
 import { z } from "zod"
 
 export const parentListLinkSchema = z.object({
+  user_id: z.number(),
   first_name: z.string(),
   last_name: z.string(),
   position_in_list: z.number(),
