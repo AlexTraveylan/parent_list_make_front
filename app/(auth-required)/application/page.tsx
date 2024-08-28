@@ -1,5 +1,6 @@
 "use client"
 
+import { SchoolsCard } from "@/components/myaccount/schools-card"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -11,16 +12,29 @@ import {
 import { Skeleton } from "@/components/ui/skeleton"
 import { authService } from "@/lib/authentification/service"
 import { navItems } from "@/lib/navigation"
+import { schoolService } from "@/lib/school/service"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function ApplicationPage() {
+  const router = useRouter()
+
   const query = useQuery({
     queryKey: ["userMeDetails"],
     queryFn: authService.getUserMeDetails,
   })
 
-  if (query.isLoading) {
+  const userSchoolsQuery = useQuery({
+    queryKey: ["userSchools"],
+    queryFn: schoolService.getUserSchools,
+  })
+
+  function handleOnClick(schoolId: number) {
+    router.push(navItems["Application"].href + "/" + schoolId)
+  }
+
+  if (query.isLoading || userSchoolsQuery.isLoading) {
     return (
       <div>
         <Skeleton className="h-[50px]" />
@@ -29,7 +43,13 @@ export default function ApplicationPage() {
     )
   }
 
-  if (query.isError || !query.data || query.data.school_ids.length === 0) {
+  if (
+    query.isError ||
+    !query.data ||
+    query.data.school_ids.length === 0 ||
+    userSchoolsQuery.isError ||
+    !userSchoolsQuery.data
+  ) {
     return (
       <div className="flex items-center justify-center my-5">
         <Card className="min-w-sm">
@@ -54,9 +74,17 @@ export default function ApplicationPage() {
   }
 
   return (
-    <div>
-      <h1>Application</h1>
-      <p>Application Page</p>
+    <div className="flex flex-col gap-4">
+      <h1 className="text-4xl font-semibold text-center">
+        {"Choisir une école"}
+      </h1>
+      <div className="flex flex-wrap gap-4 cursor-pointer">
+        {userSchoolsQuery.data.map((school) => (
+          <div onClick={() => handleOnClick(school.id)}>
+            <SchoolsCard key={school.id} school={school} />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

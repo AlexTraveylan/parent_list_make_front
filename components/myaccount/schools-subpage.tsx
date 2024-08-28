@@ -6,15 +6,9 @@ import { schoolService } from "@/lib/school/service"
 import { useQuery } from "@tanstack/react-query"
 import { useState } from "react"
 import { Button } from "../ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card"
 import { Skeleton } from "../ui/skeleton"
 import { Completion, Incompletion } from "./completion-incompletion"
+import { SchoolsCard } from "./schools-card"
 
 export function SchoolsSubPage() {
   const [isJoinFormOpen, setIsJoinFormOpen] = useState(false)
@@ -48,17 +42,7 @@ export function SchoolsSubPage() {
           <h2>Liste des écoles que tu as rejointes</h2>
           <div className="flex flex-wrap gap-4">
             {query.data.map((school) => (
-              <Card key={school.id} className="max-w-sm">
-                <CardHeader>
-                  <CardTitle>{school.school_name}</CardTitle>
-                  <CardDescription>
-                    {school.country} - {school.zip_code} - {school.city}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>{school.adress}</p>
-                </CardContent>
-              </Card>
+              <SchoolsCard key={school.id} school={school} />
             ))}
           </div>
         </>
