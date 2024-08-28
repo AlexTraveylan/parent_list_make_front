@@ -9,11 +9,14 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
 import { useUserMeStore } from "@/lib/authentification/store"
+import { Separator } from "../ui/separator"
 import ParentDetails from "./parent-details"
+import { WaitingParentDetails } from "./waiting-parent-details"
 
 export default function ParentsListsCard({
   parentList,
@@ -67,6 +70,8 @@ export default function ParentsListsCard({
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-4">
+          <h2 className="text-lg font-semibold">Confirmés</h2>
+          <Separator className="bg-muted-foreground" />
           {confirmedParents.data
             ?.sort((a, b) => a.position_in_list - b.position_in_list)
             .map((parent) => (
@@ -80,6 +85,20 @@ export default function ParentsListsCard({
             ))}
         </div>
       </CardContent>
+      <CardFooter>
+        <div className="flex flex-col gap-4">
+          <h2 className="text-lg font-semibold">En attente</h2>
+          <Separator className="bg-muted-foreground" />
+          {waitingParents.data?.map((parent) => (
+            <WaitingParentDetails
+              key={`${parent.first_name}${parent.last_name}`}
+              parent={parent}
+              isCurrentUserAdmin={userMe_is_admin}
+              list_id={parentList.id}
+            />
+          ))}
+        </div>
+      </CardFooter>
     </Card>
   )
 }

@@ -9,6 +9,7 @@ export function EmailSubPage() {
   const query = useQuery({
     queryKey: ["userMeDetails"],
     queryFn: authService.getUserMeDetails,
+    retry: 0,
   })
 
   if (query.isLoading) {

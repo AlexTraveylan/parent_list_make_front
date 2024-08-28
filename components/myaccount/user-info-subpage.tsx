@@ -1,6 +1,9 @@
 "use client"
 
-import { Completion } from "@/components/myaccount/completion-incompletion"
+import {
+  Completion,
+  Incompletion,
+} from "@/components/myaccount/completion-incompletion"
 import UserInfoForm from "@/components/myaccount/user-info-form"
 import { Skeleton } from "@/components/ui/skeleton"
 import { userInformationService } from "@/lib/user-information/service"
@@ -10,6 +13,7 @@ export function UserInfoSubPage() {
   const query = useQuery({
     queryKey: ["userInfo"],
     queryFn: userInformationService.getUserInfo,
+    retry: 0,
   })
 
   if (query.isLoading) {
@@ -21,18 +25,20 @@ export function UserInfoSubPage() {
     )
   }
 
-  if (query.isError) {
-    throw new Error("Erreur")
+  if (query.isError || !query.data) {
+    return (
+      <div className="flex flex-col gap-4">
+        <h2>Mes informations personnelles</h2>
+        <Incompletion phrase="Veuillez compléter le formulaire avec vos informations" />
+        <UserInfoForm />
+      </div>
+    )
   }
 
   return (
     <div className="flex flex-col gap-4">
       <h2>Mes informations personnelles</h2>
-      {query.data ? (
-        <Completion phrase="Informations complétés avec succès" />
-      ) : (
-        <UserInfoForm />
-      )}
+      <Completion phrase="Informations complétés avec succès" />
     </div>
   )
 }

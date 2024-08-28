@@ -17,6 +17,7 @@ export function SchoolsSubPage() {
   const query = useQuery({
     queryKey: ["userSchools"],
     queryFn: schoolService.getUserSchools,
+    retry: 0,
   })
 
   if (query.isLoading) {

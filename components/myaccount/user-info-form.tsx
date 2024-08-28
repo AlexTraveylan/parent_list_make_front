@@ -106,7 +106,7 @@ const UserInfoForm: React.FC = () => {
           )}
         />
 
-        <Button type="submit">Update profile</Button>
+        <Button type="submit">{"Ajouter ces informations"}</Button>
       </form>
     </Form>
   )

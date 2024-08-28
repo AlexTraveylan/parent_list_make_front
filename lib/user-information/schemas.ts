@@ -1,8 +1,14 @@
 import { z } from "zod"
 
 export const userInfoSchemaIn = z.object({
-  name: z.string(),
-  first_name: z.string(),
+  name: z
+    .string()
+    .min(2, { message: "Trop court, le minimum est de 2 caractères" })
+    .max(64, { message: "Trop long, le maximum est de 64 caractères" }),
+  first_name: z
+    .string()
+    .min(2, { message: "Trop court, le minimum est de 2 caractères" })
+    .max(64, { message: "Trop long, le maximum est de 64 caractères" }),
   email: z.union([z.string(), z.null()]),
 })
 
