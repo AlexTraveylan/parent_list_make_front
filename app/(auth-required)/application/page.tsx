@@ -80,8 +80,8 @@ export default function ApplicationPage() {
       </h1>
       <div className="flex flex-wrap gap-4 cursor-pointer">
         {userSchoolsQuery.data.map((school) => (
-          <div onClick={() => handleOnClick(school.id)}>
-            <SchoolsCard key={school.id} school={school} />
+          <div key={school.id} onClick={() => handleOnClick(school.id)}>
+            <SchoolsCard school={school} />
           </div>
         ))}
       </div>
