@@ -13,6 +13,26 @@ import {
 } from "./schemas"
 
 class ParentListService {
+  async parentsListsBySchoolId(schoolId: number): Promise<ParentList[]> {
+    try {
+      const response = await fetch(`${parentListRoute}${schoolId}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      })
+      if (!response.ok) {
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
+      }
+      const responseJson = await response.json()
+      const parentLists = parentListSchema.array().parse(responseJson)
+      return parentLists
+    } catch (error) {
+      throw error
+    }
+  }
+
   async getAllParentLists(): Promise<ParentList[]> {
     try {
       const response = await fetch(parentListRoute, {
