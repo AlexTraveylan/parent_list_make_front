@@ -81,7 +81,7 @@ export function CreateSchoolForm({
           name="school_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nom de l'école</FormLabel>
+              <FormLabel>{"Nom de l'école"}</FormLabel>
               <FormControl>
                 <Input placeholder="Entrez le nom de l'école" {...field} />
               </FormControl>
@@ -107,7 +107,7 @@ export function CreateSchoolForm({
           name="zip_code"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Code postal</FormLabel>
+              <FormLabel>{"Code postal"}</FormLabel>
               <FormControl>
                 <Input placeholder="Entrez le code postal" {...field} />
               </FormControl>
@@ -120,7 +120,7 @@ export function CreateSchoolForm({
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Pays</FormLabel>
+              <FormLabel>{"Pays"}</FormLabel>
               <FormControl>
                 <Input placeholder="Entrez le pays" {...field} />
               </FormControl>
@@ -133,7 +133,7 @@ export function CreateSchoolForm({
           name="adress"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Adresse</FormLabel>
+              <FormLabel>{"Adresse"}</FormLabel>
               <FormControl>
                 <Input placeholder="Entrez l'adresse" {...field} />
               </FormControl>
@@ -146,7 +146,7 @@ export function CreateSchoolForm({
           name="school_relation"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Relation avec l'école</FormLabel>
+              <FormLabel>{"Relation avec l'école"}</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>

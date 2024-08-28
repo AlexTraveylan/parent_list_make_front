@@ -35,7 +35,7 @@ export function EmailSubPage() {
           href={navItems["MyAccount"].href + "/confirm-email"}
           className="text-sm text-foreground/80 hover:text-foreground"
         >
-          Changer d'avis et confirmer son email
+          {"Changer d'avis et confirmer son email"}
         </Link>
       </div>
     </div>

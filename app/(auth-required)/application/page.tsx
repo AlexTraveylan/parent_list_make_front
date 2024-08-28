@@ -34,15 +34,18 @@ export default function ApplicationPage() {
       <div className="flex items-center justify-center my-5">
         <Card className="min-w-sm">
           <CardHeader>
-            <CardTitle>Complétez d'abord votre profil</CardTitle>
+            <CardTitle>{"Complétez d'abord votre profil"}</CardTitle>
             <CardDescription>
-              Complétez les informations manquantes de votre profil pour accéder
-              aux listes.
+              {
+                "Complétez les informations manquantes de votre profil pour accéder aux listes."
+              }
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild className="w-full">
-              <Link href={navItems["MyAccount"].href}>Aller à mon compte</Link>
+              <Link href={navItems["MyAccount"].href}>
+                {"Aller à mon compte"}
+              </Link>
             </Button>
           </CardContent>
         </Card>
