@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { EmailRecovery, emailRecoverySchema } from "@/lib/email/schemas"
+import { Email, emailSchema } from "@/lib/email/schemas"
 import { emailService } from "@/lib/email/service"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FC, useState } from "react"
@@ -28,14 +28,14 @@ import { toast } from "sonner"
 const ForgotPasswordForm: FC = () => {
   const [isWaiting, setIsWaiting] = useState(false)
 
-  const form = useForm<EmailRecovery>({
-    resolver: zodResolver(emailRecoverySchema),
+  const form = useForm<Email>({
+    resolver: zodResolver(emailSchema),
     defaultValues: {
       email: "",
     },
   })
 
-  const onSubmit = async (formdata: EmailRecovery) => {
+  const onSubmit = async (formdata: Email) => {
     if (isWaiting) {
       return
     }
