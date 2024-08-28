@@ -27,6 +27,29 @@ class SchoolService {
     }
   }
 
+  async getSchoolById(schoolId: number): Promise<School> {
+    try {
+      const response = await fetch(`${schoolRoute}${schoolId}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      })
+
+      if (!response.ok) {
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
+      }
+
+      const responseJson = await response.json()
+      const school = schoolSchema.parse(responseJson)
+
+      return school
+    } catch (error) {
+      throw error
+    }
+  }
+
   async createSchool(school: SchoolShemaIn): Promise<School> {
     const authToken = extractAuthTokenFromLocalStorage()
     const headers = new Headers()

@@ -11,8 +11,14 @@ export const parentListSchema = z.object({
 export type ParentList = z.infer<typeof parentListSchema>
 
 export const parentListSchemaIn = z.object({
-  list_name: z.string(),
-  holder_length: z.number(),
+  list_name: z
+    .string()
+    .min(2, { message: "Nom trop court, le minimum est de 2 caractères" })
+    .max(64, { message: "Nom trop long, le maximum est de 64 caractères" }),
+  holder_length: z
+    .number()
+    .min(5, { message: "La longueur doit être supérieure à 5" })
+    .max(15, { message: "La longueur doit être inférieure à 15" }),
   school_id: z.number(),
 })
 

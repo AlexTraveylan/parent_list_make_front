@@ -56,9 +56,7 @@ class ParentListService {
     }
   }
 
-  async createParentList(
-    parentList: ParentListShemaIn
-  ): Promise<ParentListShemaIn> {
+  async createParentList(parentList: ParentListShemaIn): Promise<void> {
     const authToken = extractAuthTokenFromLocalStorage()
     const headers = new Headers()
     headers.append("Authorization", authToken)
@@ -75,11 +73,6 @@ class ParentListService {
         const errorMessage = await response.json()
         throw new Error(errorMessage.detail)
       }
-
-      const responseJson = await response.json()
-      const createdParentList = parentListSchema.parse(responseJson)
-
-      return createdParentList
     } catch (error) {
       throw error
     }
