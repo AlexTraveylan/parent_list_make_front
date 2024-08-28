@@ -1,11 +1,56 @@
-import { addEmailRoute, contactUserRoute } from "../api-routes"
+import {
+  addEmailRoute,
+  contactUserRoute,
+  resetPasswordRoute,
+  sendResetPasswordRequestRoute,
+} from "../api-routes"
 import { extractAuthTokenFromLocalStorage } from "../authentification/token"
 import { EmailConfirmationToken, emailConfirmationTokenSchema } from "./schemas"
 
 class EmailService {
-  async sendResetPasswordRequest(email: string): Promise<void> {
-    // TODO : write it later
-    console.log("sendResetPasswordRequest", email)
+  async sendResetPasswordRequest(username: string): Promise<void> {
+    const headers = new Headers()
+    headers.append("Content-Type", "application/json")
+
+    try {
+      const response = await fetch(`${sendResetPasswordRequestRoute}`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({
+          username: username,
+        }),
+      })
+
+      if (!response.ok) {
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async resetPassword(token: string, password: string): Promise<void> {
+    const headers = new Headers()
+    headers.append("Content-Type", "application/json")
+
+    try {
+      const response = await fetch(`${resetPasswordRoute}`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({
+          token: token,
+          new_password: password,
+        }),
+      })
+
+      if (!response.ok) {
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
+      }
+    } catch (error) {
+      throw error
+    }
   }
 
   async addEmailToUser(email: string): Promise<EmailConfirmationToken> {

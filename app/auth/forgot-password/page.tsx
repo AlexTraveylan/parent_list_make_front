@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Email, emailSchema } from "@/lib/email/schemas"
+import { Username, usernameSchema } from "@/lib/email/schemas"
 import { emailService } from "@/lib/email/service"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FC, useState } from "react"
@@ -28,14 +28,14 @@ import { toast } from "sonner"
 const ForgotPasswordForm: FC = () => {
   const [isWaiting, setIsWaiting] = useState(false)
 
-  const form = useForm<Email>({
-    resolver: zodResolver(emailSchema),
+  const form = useForm<Username>({
+    resolver: zodResolver(usernameSchema),
     defaultValues: {
-      email: "",
+      username: "",
     },
   })
 
-  const onSubmit = async (formdata: Email) => {
+  const onSubmit = async (formdata: Username) => {
     if (isWaiting) {
       return
     }
@@ -45,7 +45,7 @@ const ForgotPasswordForm: FC = () => {
       setIsWaiting(false)
     }, 30000)
     try {
-      await emailService.sendResetPasswordRequest(formdata.email)
+      await emailService.sendResetPasswordRequest(formdata.username)
       toast.success(
         "Un email vous a été envoyé pour réinitialiser votre mot de passe"
       )
@@ -61,7 +61,7 @@ const ForgotPasswordForm: FC = () => {
         <CardTitleH1>{"Mot de passe oublié ?"}</CardTitleH1>
         <CardDescription>
           {
-            "Saisissez votre adresse email pour recevoir un lien de réinitialisation de mot de passe."
+            "Saisissez votre nom d'utilisateur pour recevoir un lien de réinitialisation de mot de passe."
           }
         </CardDescription>
       </CardHeader>
@@ -70,10 +70,10 @@ const ForgotPasswordForm: FC = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
-              name="email"
+              name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{"Email"}</FormLabel>
+                  <FormLabel>{"Nom d'utilisateur"}</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>

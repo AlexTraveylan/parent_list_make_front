@@ -8,8 +8,22 @@ export const authTokenSchema = z.object({
 export type AuthToken = z.infer<typeof authTokenSchema>
 
 export const authSchemaIn = z.object({
-  username: z.string(),
-  password: z.string(),
+  username: z
+    .string()
+    .min(2, { message: "Le nom d'utilisateur est trop court" })
+    .max(64, { message: "Le nom d'utilisateur est trop long" }),
+  password: z
+    .string()
+    .min(8, { message: "Le mot de passe doit être au moins 8 caractères" })
+    .refine((value) => /[a-z]/.test(value), {
+      message: "Le mot de passe doit contenir au moins une lettre minuscule",
+    })
+    .refine((value) => /[A-Z]/.test(value), {
+      message: "Le mot de passe doit contenir au moins une lettre majuscule",
+    })
+    .refine((value) => /\d/.test(value), {
+      message: "Le mot de passe doit contenir au moins un chiffre",
+    }),
 })
 
 export type AuthSchemaIn = z.infer<typeof authSchemaIn>
@@ -32,3 +46,20 @@ export const userMeDetailsSchema = z.object({
 })
 
 export type UserMeDetails = z.infer<typeof userMeDetailsSchema>
+
+export const resetPasswordSchema = z.object({
+  new_password: z
+    .string()
+    .min(8, { message: "Le mot de passe doit être au moins 8 caractères" })
+    .refine((value) => /[a-z]/.test(value), {
+      message: "Le mot de passe doit contenir au moins une lettre minuscule",
+    })
+    .refine((value) => /[A-Z]/.test(value), {
+      message: "Le mot de passe doit contenir au moins une lettre majuscule",
+    })
+    .refine((value) => /\d/.test(value), {
+      message: "Le mot de passe doit contenir au moins un chiffre",
+    }),
+})
+
+export type ResetPassword = z.infer<typeof resetPasswordSchema>

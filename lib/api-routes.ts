@@ -11,9 +11,11 @@ export const userMeDetailsRoute = url + "/users/me/details/"
 
 // Email routes
 const emailExt = "/confirmation-email/"
-
 export const addEmailRoute = url + emailExt
 export const contactUserRoute = url + emailExt + "contact-user/"
+export const sendResetPasswordRequestRoute =
+  url + emailExt + "request-password-reset"
+export const resetPasswordRoute = url + emailExt + "reset-password"
 
 // User Information routes
 const userInfoExt = "/user-informations/"

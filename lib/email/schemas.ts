@@ -19,3 +19,12 @@ export const emailConfirmationTokenSchema = z.object({
 export type EmailConfirmationToken = z.infer<
   typeof emailConfirmationTokenSchema
 >
+
+export const usernameSchema = z.object({
+  username: z
+    .string()
+    .min(2, { message: "Trop court, le minimum est de 2 caractères" })
+    .max(64, { message: "Trop long, le maximum est de 64 caractères" }),
+})
+
+export type Username = z.infer<typeof usernameSchema>
