@@ -23,11 +23,13 @@ export default function ApplicationPage() {
   const query = useQuery({
     queryKey: ["userMeDetails"],
     queryFn: authService.getUserMeDetails,
+    retry: 0,
   })
 
   const userSchoolsQuery = useQuery({
     queryKey: ["userSchools"],
     queryFn: schoolService.getUserSchools,
+    retry: 0,
   })
 
   function handleOnClick(schoolId: number) {

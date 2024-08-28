@@ -92,6 +92,7 @@ class ParentListService {
     const authToken = extractAuthTokenFromLocalStorage()
     const headers = new Headers()
     headers.append("Authorization", authToken)
+    headers.append("Content-Type", "application/json")
 
     try {
       const response = await fetch(`${joinParentListRoute}${parentListId}`, {
@@ -143,9 +144,6 @@ class ParentListService {
         {
           method: "PATCH",
           headers: headers,
-          body: JSON.stringify({
-            user_to_accept_id: userToAcceptId,
-          }),
         }
       )
 

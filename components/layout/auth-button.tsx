@@ -11,9 +11,9 @@ export const AuthButton = () => {
   const router = useRouter()
 
   const handleLogout = async () => {
+    router.push(navItems["Home"].href)
     localStorage.removeItem("auth_token")
     cleanUserMe()
-    router.push(navItems["Home"].href)
   }
 
   if (userMe !== null) {

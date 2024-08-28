@@ -73,10 +73,16 @@ export function WaitingParentDetails({
       parentListService.acceptParentList(user_id, list_id),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["confirmedParents", "waitingParents"],
+        queryKey: ["confirmedParents"],
       })
       queryClient.refetchQueries({
-        queryKey: ["confirmedParents", "waitingParents"],
+        queryKey: ["confirmedParents"],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ["waitingParents"],
+      })
+      queryClient.refetchQueries({
+        queryKey: ["waitingParents"],
       })
       toast.success("Modification enregistrée avec succès")
     },

@@ -14,6 +14,7 @@ export default function SchoolListPage({
   const query = useQuery({
     queryKey: ["userMeDetails"],
     queryFn: authService.getUserMeDetails,
+    retry: 0,
   })
 
   const parenstListsQuery = useQuery({
