@@ -16,7 +16,7 @@ export const SchoolsCard = ({ school }: { school: School }) => {
           {school.country} - {school.zip_code} - {school.city}
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex justify-center">
         <p>{school.adress}</p>
       </CardContent>
     </Card>
