@@ -1,6 +1,6 @@
 const url =
   process.env.NODE_ENV === "production"
-    ? "https://parentslistmaker.com"
+    ? "https://parentslistsmaker-alextraveylans-projects.vercel.app"
     : "http://localhost:8000"
 
 // Auth routes

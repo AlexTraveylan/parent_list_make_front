@@ -1,11 +1,12 @@
 "use client"
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
+  CardTitleH1,
 } from "@/components/ui/card"
 import {
   Form,
@@ -27,7 +28,9 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
-export default function ResetPasswordPage() {
+import { Suspense } from "react"
+
+function ResetPasswordForm() {
   const params = useSearchParams()
   const token = params.get("token")
   const router = useRouter()
@@ -55,12 +58,12 @@ export default function ResetPasswordPage() {
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
-        <CardTitle className="text-2xl">
+        <CardTitleH1 className="text-2xl">
           {"Réinitialisation du mot de passe"}
-        </CardTitle>
+        </CardTitleH1>
         <CardDescription>
           {
-            "Vous arriver avec un lien de réinitialisation de mot de passe, entrez votre nouveau mot de passe"
+            "Vous arrivez avec un lien de réinitialisation de mot de passe, entrez votre nouveau mot de passe"
           }
         </CardDescription>
       </CardHeader>
@@ -87,5 +90,13 @@ export default function ResetPasswordPage() {
         </Form>
       </CardContent>
     </Card>
+  )
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordForm />
+    </Suspense>
   )
 }
