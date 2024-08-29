@@ -94,7 +94,11 @@ const UserInfoForm: React.FC = () => {
             <FormItem>
               <FormLabel>Votre email</FormLabel>
               <FormControl>
-                <Input {...field} value={field.value || ""} />
+                <Input
+                  {...field}
+                  value={field.value || ""}
+                  placeholder="facultatif"
+                />
               </FormControl>
               <FormDescription>
                 {
