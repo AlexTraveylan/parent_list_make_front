@@ -34,7 +34,8 @@ class AuthentificationService {
       })
 
       if (!response.ok) {
-        throw new Error(`Echec de la connexion ${response.status}`)
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
       }
 
       const responseJson = await response.json()
@@ -64,7 +65,8 @@ class AuthentificationService {
       })
 
       if (!response.ok) {
-        throw new Error(`Echec de la connexion ${response.status}`)
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
       }
 
       const responseJson = await response.json()
@@ -88,7 +90,8 @@ class AuthentificationService {
       })
 
       if (!response.ok) {
-        throw new Error(`Echec de la connexion ${response.status}`)
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
       }
 
       const responseJson = await response.json()
@@ -112,7 +115,8 @@ class AuthentificationService {
       })
 
       if (!response.ok) {
-        throw new Error(`Echec de la connexion ${response.status}`)
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
       }
 
       const responseJson = await response.json()

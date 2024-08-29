@@ -47,7 +47,7 @@ export default function RegisterPage() {
       toast.success("Compte créé avec succès")
       router.push(navItems["MyAccount"].href)
     } catch (error) {
-      toast.error("Echec de la création du compte")
+      toast.error(String(error))
     }
   }
 

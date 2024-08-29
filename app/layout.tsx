@@ -34,7 +34,7 @@ export default function RootLayout({
             <div className="container mx-auto py-8">{children}</div>
             <Footer />
           </main>
-          <Toaster richColors position="top-left" />
+          <Toaster richColors position="bottom-right" />
         </ThemeProvider>
       </body>
     </html>

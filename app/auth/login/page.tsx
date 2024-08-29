@@ -48,7 +48,7 @@ export default function LoginPage() {
       fetchUserMe()
       router.push(navItems["MyAccount"].href)
     } catch (error) {
-      toast.error("Echec de la connexion, avez-vous crée un compte ?")
+      toast.error(String(error))
     }
   }
 

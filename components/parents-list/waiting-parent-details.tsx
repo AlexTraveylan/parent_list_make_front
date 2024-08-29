@@ -61,8 +61,8 @@ export function WaitingParentDetails({
   const onSubmitEmail = async (data: Message) => {
     try {
       await emailService.contactUser(data.message, parent.user_id)
-
       toast.success("Message envoyé avec succès")
+      messageForm.reset()
     } catch (error) {
       toast.error(String(error))
     }

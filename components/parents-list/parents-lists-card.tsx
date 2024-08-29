@@ -107,6 +107,7 @@ export default function ParentsListsCard({
       queryClient.refetchQueries({
         queryKey: ["waitingParents"],
       })
+      messageForm.reset()
       toast.success("Demande envoyée avec succès")
     },
     onError: (error) => {
