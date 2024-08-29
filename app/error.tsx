@@ -12,7 +12,12 @@ export default function Error({
   return (
     <div className="text-center flex flex-col gap-3">
       <div>{"Une erreur s'est produite !"}</div>
-      <a href={navItems["Home"].href}>{"Retour à l'accueil"}</a>
+      <a
+        className="border-solid border-2 rounded-md p-2"
+        href={navItems["Home"].href}
+      >
+        {"Retour à l'accueil"}
+      </a>
     </div>
   )
 }
