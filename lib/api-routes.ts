@@ -1,6 +1,6 @@
 const url =
   process.env.NODE_ENV === "production"
-    ? "https://parentslistmaker.up.railway.app/"
+    ? "https://parentslistmaker.up.railway.app"
     : "http://localhost:8000"
 
 // Auth routes
