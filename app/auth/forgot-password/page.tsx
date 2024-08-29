@@ -50,7 +50,7 @@ const ForgotPasswordForm: FC = () => {
         "Un email vous a été envoyé pour réinitialiser votre mot de passe"
       )
     } catch (error) {
-      toast.error("Echec de l'envoi de mail")
+      toast.error("Utilisateur introuvable ou sans email confirmé")
     }
     return timer
   }

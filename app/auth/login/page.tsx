@@ -14,6 +14,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { InputEye } from "@/components/ui/input-password-eye"
@@ -47,7 +48,7 @@ export default function LoginPage() {
       fetchUserMe()
       router.push(navItems["MyAccount"].href)
     } catch (error) {
-      toast.error("Echec de la connexion")
+      toast.error("Echec de la connexion, avez-vous crée un compte ?")
     }
   }
 
@@ -85,6 +86,7 @@ export default function LoginPage() {
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -105,6 +107,7 @@ export default function LoginPage() {
                     <FormControl>
                       <InputEye {...field} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />

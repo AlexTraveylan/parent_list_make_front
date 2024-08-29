@@ -2,8 +2,10 @@
 
 import SchoolForm from "@/components/myaccount/join-school-form"
 import { CreateSchoolForm } from "@/components/myaccount/school-form"
+import { navItems } from "@/lib/navigation"
 import { schoolService } from "@/lib/school/service"
 import { useQuery } from "@tanstack/react-query"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Button } from "../ui/button"
 import { Skeleton } from "../ui/skeleton"
@@ -13,12 +15,17 @@ import { SchoolsCard } from "./schools-card"
 export function SchoolsSubPage() {
   const [isJoinFormOpen, setIsJoinFormOpen] = useState(false)
   const [isCreatingFormOpen, setIsCreatingFormOpen] = useState(false)
+  const router = useRouter()
 
   const query = useQuery({
     queryKey: ["userSchools"],
     queryFn: schoolService.getUserSchools,
     retry: 0,
   })
+
+  function handleOnClick(schoolId: number) {
+    router.push(navItems["Application"].href + "/" + schoolId)
+  }
 
   if (query.isLoading) {
     return (
@@ -43,7 +50,9 @@ export function SchoolsSubPage() {
           <h2>Liste des écoles que tu as rejointes</h2>
           <div className="flex flex-wrap gap-4">
             {query.data.map((school) => (
-              <SchoolsCard key={school.id} school={school} />
+              <div key={school.id} onClick={() => handleOnClick(school.id)}>
+                <SchoolsCard key={school.id} school={school} />
+              </div>
             ))}
           </div>
         </>
