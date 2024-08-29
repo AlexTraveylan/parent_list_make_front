@@ -25,7 +25,7 @@ export const userInfoRoute = url + userInfoExt
 const schoolExt = "/schools/"
 export const schoolRoute = url + schoolExt
 export const joinSchoolRoute = url + schoolExt + "join/"
-export const userSchoolRoute = url + schoolExt + "me/"
+export const userSchoolRoute = url + schoolExt + "me"
 
 // Parents lists routes
 const parentListExt = "/parents-lists/"
