@@ -35,6 +35,7 @@ const UserInfoForm: React.FC = () => {
     mutationFn: userInformationService.createUserInfo,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userInfo"] })
+      queryClient.refetchQueries({ queryKey: ["userInfo"] })
       toast.success("Informations enregistrées avec succès")
     },
     onError: (error) => {
