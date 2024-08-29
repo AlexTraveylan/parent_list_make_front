@@ -21,16 +21,12 @@ class UserInformationService {
         headers: headers,
         body: JSON.stringify(userInfo),
       })
-      console.log("response received") // TODO: remove
       if (!response.ok) {
-        console.log("!response.ok") // TODO: remove
         const errorMessage = await response.json()
         throw new Error(errorMessage.detail)
       }
-      console.log("response.ok") // TODO: remove
       const responseJson = await response.json()
       const userInfoResponse = userInfoSchemaOut.parse(responseJson)
-      console.log("parsing ok", userInfoResponse) // TODO: remove
       return userInfoResponse
     } catch (error) {
       throw error

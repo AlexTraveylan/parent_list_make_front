@@ -18,7 +18,7 @@ export const userInfoSchemaOut = z.object({
   id: z.number(),
   encrypted_name: z.string(),
   encrypted_first_name: z.string(),
-  encrypted_email: z.string(),
+  encrypted_email: z.union([z.string(), z.null()]),
   is_email_confirmed: z.boolean(),
   user_id: z.number(),
 })
