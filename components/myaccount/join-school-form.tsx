@@ -41,7 +41,8 @@ export default function SchoolForm({
   const createSchoolMutation = useMutation({
     mutationFn: schoolService.joinSchool,
     onSuccess: () => {
-      queryClient.resetQueries({ queryKey: ["userSchools"] })
+      queryClient.invalidateQueries({ queryKey: ["userSchools"] })
+      queryClient.refetchQueries({ queryKey: ["userSchools"] })
       toast.success("École créée avec succès")
       form.reset()
       setIsJoinFormOpen(false)
