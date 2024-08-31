@@ -2,8 +2,9 @@ import { authService } from "@/lib/authentification/service"
 import { navItems } from "@/lib/navigation"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
+import { Separator } from "../ui/separator"
 import { Skeleton } from "../ui/skeleton"
-import { Completion, Incompletion } from "./completion-incompletion"
+import { Completion, Warningtional } from "./completion-incompletion"
 
 export function EmailSubPage() {
   const query = useQuery({
@@ -30,7 +31,8 @@ export function EmailSubPage() {
 
   return (
     <div>
-      <Incompletion phrase={"Aucun email confirmé enregistré (facultatif)"} />
+      <Separator />
+      <Warningtional phrase={"Aucun email confirmé enregistré (facultatif)"} />
       <div className="flex justify-end mt-2">
         <Link
           href={navItems["MyAccount"].href + "/confirm-email"}

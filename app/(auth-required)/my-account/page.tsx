@@ -11,9 +11,7 @@ export default function MyAccountPage() {
       <h1 className="text-4xl font-semibold text-center">Mon compte</h1>
       <UserInfoSubPage />
       <EmailSubPage />
-      <Separator />
       <SchoolsSubPage />
-      <Separator />
     </div>
   )
 }
