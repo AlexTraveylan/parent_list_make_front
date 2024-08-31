@@ -36,7 +36,7 @@ import { Message, messageSchema, ParentList } from "@/lib/parents-list/schemas"
 import { parentListService } from "@/lib/parents-list/service"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { LogOut, Plus } from "lucide-react"
+import { LogOut, Merge } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import {
@@ -226,7 +226,7 @@ export default function ParentsListsCard({
                     aria-label="Bouton pour rejoindre la liste"
                     className="flex gap-1 items-center justify-center"
                   >
-                    <Plus />
+                    <Merge className="text-orange-500" />
                     <span className="text-sm">{"rejoindre"}</span>
                   </Button>
                 </DialogTrigger>
