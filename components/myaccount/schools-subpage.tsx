@@ -44,7 +44,7 @@ export function SchoolsSubPage() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h2>{"Étape 2/3 - Mes écoles"}</h2>
+      <h2>{"Étape 2/2 - Mes écoles"}</h2>
       <Separator />
       {query.data && query.data.length > 0 ? (
         <>
