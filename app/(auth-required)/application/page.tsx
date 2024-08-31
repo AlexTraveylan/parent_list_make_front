@@ -15,11 +15,8 @@ import { navItems } from "@/lib/navigation"
 import { schoolService } from "@/lib/school/service"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 
 export default function ApplicationPage() {
-  const router = useRouter()
-
   const query = useQuery({
     queryKey: ["userMeDetails"],
     queryFn: authService.getUserMeDetails,
@@ -31,10 +28,6 @@ export default function ApplicationPage() {
     queryFn: schoolService.getUserSchools,
     retry: 0,
   })
-
-  function handleOnClick(schoolId: number) {
-    router.push(navItems["Application"].href + "/" + schoolId)
-  }
 
   if (query.isLoading || userSchoolsQuery.isLoading) {
     return (
@@ -82,9 +75,7 @@ export default function ApplicationPage() {
       </h1>
       <div className="flex flex-wrap gap-4 cursor-pointer">
         {userSchoolsQuery.data.map((school) => (
-          <div key={school.id} onClick={() => handleOnClick(school.id)}>
-            <SchoolsCard school={school} />
-          </div>
+          <SchoolsCard school={school} />
         ))}
       </div>
     </div>
