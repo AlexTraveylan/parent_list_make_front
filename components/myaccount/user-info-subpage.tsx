@@ -29,7 +29,7 @@ export function UserInfoSubPage() {
   if (query.isError || !query.data) {
     return (
       <div className="flex flex-col gap-4">
-        <h2>Mes informations personnelles</h2>
+        <h2>{"Étape 1/3 - Mes informations personnelles"}</h2>
         <Separator />
         <Incompletion phrase="Veuillez compléter le formulaire avec vos informations" />
         <UserInfoForm />
@@ -39,7 +39,7 @@ export function UserInfoSubPage() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h2>Mes informations personnelles</h2>
+      <h2>{"Étape 1/3 - Mes informations personnelles"}</h2>
       <Separator />
       <Completion phrase="Informations complétés avec succès" />
     </div>

@@ -51,12 +51,12 @@ export function SchoolsSubPage() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h2>Mes écoles</h2>
+      <h2>{"Étape 2/3 - Mes écoles"}</h2>
       <Separator />
       {query.data && query.data.length > 0 ? (
         <>
           <Completion phrase={"Tu as rejoins au moins une école !"} />
-          <h2>Liste des écoles que tu as rejointes</h2>
+          <h2>{"Liste des écoles que tu as rejointes"}</h2>
           <div className="flex flex-wrap gap-4">
             {query.data.map((school) => (
               <div key={school.id} onClick={() => handleOnClick(school.id)}>
