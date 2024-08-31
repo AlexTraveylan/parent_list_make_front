@@ -8,6 +8,7 @@ import UserInfoForm from "@/components/myaccount/user-info-form"
 import { Skeleton } from "@/components/ui/skeleton"
 import { userInformationService } from "@/lib/user-information/service"
 import { useQuery } from "@tanstack/react-query"
+import { Separator } from "../ui/separator"
 
 export function UserInfoSubPage() {
   const query = useQuery({
@@ -29,6 +30,7 @@ export function UserInfoSubPage() {
     return (
       <div className="flex flex-col gap-4">
         <h2>Mes informations personnelles</h2>
+        <Separator />
         <Incompletion phrase="Veuillez compléter le formulaire avec vos informations" />
         <UserInfoForm />
       </div>
@@ -38,6 +40,7 @@ export function UserInfoSubPage() {
   return (
     <div className="flex flex-col gap-4">
       <h2>Mes informations personnelles</h2>
+      <Separator />
       <Completion phrase="Informations complétés avec succès" />
     </div>
   )

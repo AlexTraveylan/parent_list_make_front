@@ -18,6 +18,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import React from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card"
 
 const UserInfoForm: React.FC = () => {
   const queryClient = useQueryClient()
@@ -52,68 +59,78 @@ const UserInfoForm: React.FC = () => {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Nom de famille</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormDescription>
-                {
-                  "Votre nom de famille, tel qu'il apparaîtra aux autres parents."
-                }
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="first_name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Prénom</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormDescription>
-                {"Votre prénom, tel qu'il apparaîtra aux autres parents."}
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Votre email</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  value={field.value || ""}
-                  placeholder="facultatif"
-                />
-              </FormControl>
-              <FormDescription>
-                {
-                  "Votre email n'apparaîtra pas aux autres parents, il sera stocké de manière sécurisée. Avec un email valide, vous pourrez créer une liste et être contacté par les autres parents par l'intermédiaire de l'application."
-                }
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+    <Card>
+      <CardContent>
+        <CardHeader>
+          <CardTitle>Formulaire</CardTitle>
+          <CardDescription>
+            Formulaire pour ajouter vos informations personnelles
+          </CardDescription>
+        </CardHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nom de famille</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    {
+                      "Votre nom de famille, tel qu'il apparaîtra aux autres parents."
+                    }
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="first_name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Prénom</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    {"Votre prénom, tel qu'il apparaîtra aux autres parents."}
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Votre email</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      value={field.value || ""}
+                      placeholder="(Facultatif)"
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    {
+                      "Avec un email valide, vous pourrez créer une liste et être contacté par les autres parents par l'intermédiaire de l'application. Votre email n'apparaîtra pas aux autres parents sans votre permission, il sera stocké de manière sécurisée."
+                    }
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <Button type="submit">{"Ajouter ces informations"}</Button>
-      </form>
-    </Form>
+            <Button type="submit">{"Ajouter ces informations"}</Button>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
   )
 }
 
