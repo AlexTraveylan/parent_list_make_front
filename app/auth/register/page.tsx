@@ -10,6 +10,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -87,6 +88,11 @@ export default function RegisterPage() {
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
+                    <FormDescription>
+                      {
+                        "Vous n'apparaîtrez pas sous ce nom, il ne sert qu'à vous identifier."
+                      }
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -100,6 +106,11 @@ export default function RegisterPage() {
                     <FormControl>
                       <InputEye {...field} />
                     </FormControl>
+                    <FormDescription>
+                      {
+                        "Minimum 8 caractères, doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre."
+                      }
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
