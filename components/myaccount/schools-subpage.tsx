@@ -8,6 +8,14 @@ import { useQuery } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Button } from "../ui/button"
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card"
+import { Separator } from "../ui/separator"
 import { Skeleton } from "../ui/skeleton"
 import { Completion, Incompletion } from "./completion-incompletion"
 import { SchoolsCard } from "./schools-card"
@@ -44,6 +52,7 @@ export function SchoolsSubPage() {
   return (
     <div className="flex flex-col gap-4">
       <h2>Mes écoles</h2>
+      <Separator />
       {query.data && query.data.length > 0 ? (
         <>
           <Completion phrase={"Tu as rejoins au moins une école !"} />
@@ -59,24 +68,32 @@ export function SchoolsSubPage() {
       ) : (
         <Incompletion phrase={"Aucune école rejointe"} />
       )}
-      <h2>
-        {query.data && query.data.length > 0
-          ? "Rejoint une autre école (facultatif)"
-          : "Rejoint une école"}
-      </h2>
-      <div className="flex gap-4 justify-center flex-wrap">
-        {!isCreatingFormOpen && (
-          <Button onClick={() => setIsJoinFormOpen(!isJoinFormOpen)}>
-            {isJoinFormOpen ? "Fermer" : "Rejoint une école déjà existante"}
-          </Button>
-        )}
-        {!isJoinFormOpen && (
-          <Button onClick={() => setIsCreatingFormOpen(!isCreatingFormOpen)}>
-            {isCreatingFormOpen ? "Fermer" : "Enregistre une nouvelle école"}
-          </Button>
-        )}
-      </div>
-      {isJoinFormOpen && <SchoolForm setIsJoinFormOpen={setIsJoinFormOpen} />}
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            {query.data && query.data.length > 0
+              ? "Rejoint une autre école (facultatif)"
+              : "Rejoint une école"}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex gap-4 justify-center flex-wrap">
+          {!isCreatingFormOpen && (
+            <Button onClick={() => setIsJoinFormOpen(!isJoinFormOpen)}>
+              {isJoinFormOpen ? "Fermer" : "Rejoint une école déjà existante"}
+            </Button>
+          )}
+          {!isJoinFormOpen && (
+            <Button onClick={() => setIsCreatingFormOpen(!isCreatingFormOpen)}>
+              {isCreatingFormOpen ? "Fermer" : "Enregistre une nouvelle école"}
+            </Button>
+          )}
+        </CardContent>
+        <CardFooter>
+          {isJoinFormOpen && (
+            <SchoolForm setIsJoinFormOpen={setIsJoinFormOpen} />
+          )}
+        </CardFooter>
+      </Card>
       {isCreatingFormOpen && (
         <CreateSchoolForm setIsCreatingFormOpen={setIsCreatingFormOpen} />
       )}
