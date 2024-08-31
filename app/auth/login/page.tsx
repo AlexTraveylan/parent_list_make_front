@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { InputEye } from "@/components/ui/input-password-eye"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { AuthSchemaIn, authSchemaIn } from "@/lib/authentification/schemas"
+import { Login, loginSchema } from "@/lib/authentification/schemas"
 import { authService } from "@/lib/authentification/service"
 import { useUserMeStore } from "@/lib/authentification/store"
 import { authNavItems, navItems } from "@/lib/navigation"
@@ -32,8 +32,8 @@ import { toast } from "sonner"
 export default function LoginPage() {
   const { fetchUserMe } = useUserMeStore()
   const router = useRouter()
-  const form = useForm<AuthSchemaIn>({
-    resolver: zodResolver(authSchemaIn),
+  const form = useForm<Login>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       username: "",
       password: "",
@@ -41,7 +41,7 @@ export default function LoginPage() {
     mode: "onChange",
   })
 
-  const onSubmit = async (formData: AuthSchemaIn) => {
+  const onSubmit = async (formData: Login) => {
     try {
       const token = await authService.login(formData)
       localStorage.setItem("auth_token", token.access_token)

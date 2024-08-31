@@ -7,6 +7,13 @@ export const authTokenSchema = z.object({
 
 export type AuthToken = z.infer<typeof authTokenSchema>
 
+export const loginSchema = z.object({
+  username: z.string(),
+  password: z.string(),
+})
+
+export type Login = z.infer<typeof loginSchema>
+
 export const authSchemaIn = z.object({
   username: z
     .string()
