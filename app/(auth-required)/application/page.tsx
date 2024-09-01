@@ -75,7 +75,7 @@ export default function ApplicationPage() {
       </h1>
       <div className="flex flex-wrap gap-4 cursor-pointer">
         {userSchoolsQuery.data.map((school) => (
-          <SchoolsCard school={school} />
+          <SchoolsCard key={school.id} school={school} />
         ))}
       </div>
     </div>
