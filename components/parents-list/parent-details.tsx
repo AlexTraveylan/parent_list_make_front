@@ -45,11 +45,13 @@ export default function ParentDetails({
   isCurrentUserAdmin,
   list_id,
   confirmedListLength,
+  isCurrentUserCreator,
 }: {
   parent: ParentListLink
   isCurrentUserAdmin: boolean
   list_id: number
   confirmedListLength: number
+  isCurrentUserCreator: boolean
 }) {
   const queryClient = useQueryClient()
 
@@ -137,6 +139,29 @@ export default function ParentDetails({
     },
   })
 
+  const transferProprietyMutation = useMutation({
+    mutationFn: ({ targetUserId }: { targetUserId: number }) =>
+      linksService.transferListPropriety(list_id, targetUserId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["confirmedParents"],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ["userParentLists"],
+      })
+      queryClient.refetchQueries({
+        queryKey: ["confirmedParents"],
+      })
+      queryClient.refetchQueries({
+        queryKey: ["userParentLists"],
+      })
+      toast.success("Modification enregistrée avec succès")
+    },
+    onError: (error) => {
+      toast.error(String(error))
+    },
+  })
+
   const handleMakeAdmin = async () => {
     makeAdminMutation.mutate({
       parentListId: list_id,
@@ -155,6 +180,12 @@ export default function ParentDetails({
     downParentMutation.mutate({
       parentListId: list_id,
       userId: parent.user_id,
+    })
+  }
+
+  const handleTransferPropriety = async () => {
+    transferProprietyMutation.mutate({
+      targetUserId: parent.user_id,
     })
   }
 
@@ -220,6 +251,11 @@ export default function ParentDetails({
                   >
                     <ChevronDown className="text-red-800 dark:text-red-400" />
                     <span>Descendre</span>
+                  </DropdownMenuItem>
+                )}
+                {isCurrentUserCreator && parent.is_email === true && (
+                  <DropdownMenuItem onClick={handleTransferPropriety}>
+                    {"Transférer la propriété"}
                   </DropdownMenuItem>
                 )}
               </DropdownMenuContent>

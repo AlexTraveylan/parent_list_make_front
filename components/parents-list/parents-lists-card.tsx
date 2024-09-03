@@ -142,8 +142,10 @@ export default function ParentsListsCard({
   )
 
   let userMe_is_admin = false
+  let isCurrentUserCreator = false
   if (myLink) {
     userMe_is_admin = myLink.is_admin
+    isCurrentUserCreator = myLink.is_creator
   }
 
   const isCurrentUserOnWaitingList = waitingParents.data?.some(
@@ -210,6 +212,7 @@ export default function ParentsListsCard({
                 isCurrentUserAdmin={userMe_is_admin}
                 list_id={parentList.id}
                 confirmedListLength={confirmedParents.data?.length}
+                isCurrentUserCreator={isCurrentUserCreator}
               />
             ))}
         </div>
