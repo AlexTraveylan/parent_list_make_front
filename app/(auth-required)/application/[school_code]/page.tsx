@@ -55,10 +55,6 @@ export default function SchoolListPage({
     return null
   }
 
-  if (!query.data.school_ids.includes(schoolQuery.data.id)) {
-    return null
-  }
-
   return (
     <div className="flex flex-col gap-4 justify-center">
       <div className="flex flex-col justify-center gap-1">

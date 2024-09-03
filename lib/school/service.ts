@@ -1,6 +1,13 @@
 import { joinSchoolRoute, schoolRoute, userSchoolRoute } from "../api-routes"
 import { extractAuthTokenFromLocalStorage } from "../authentification/token"
-import { School, schoolSchema, SchoolSchemaIn, schoolSchemaIn } from "./schemas"
+import {
+  School,
+  SchoolOut,
+  schoolSchema,
+  SchoolSchemaIn,
+  schoolSchemaIn,
+  schoolSchemaOut,
+} from "./schemas"
 
 class SchoolService {
   async getUserSchools(): Promise<School[]> {
@@ -28,7 +35,7 @@ class SchoolService {
     }
   }
 
-  async getSchoolBySchoolCode(schoolCode: string): Promise<School> {
+  async getSchoolBySchoolCode(schoolCode: string): Promise<SchoolOut> {
     try {
       const response = await fetch(`${schoolRoute}${schoolCode}`, {
         method: "GET",
@@ -43,7 +50,7 @@ class SchoolService {
       }
 
       const responseJson = await response.json()
-      const school = schoolSchema.parse(responseJson)
+      const school = schoolSchemaOut.parse(responseJson)
 
       return school
     } catch (error) {

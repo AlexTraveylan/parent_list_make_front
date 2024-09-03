@@ -29,7 +29,7 @@ export const SchoolsCard = ({ school }: { school: School }) => {
   return (
     <Card key={school.id} className="max-w-sm">
       <CardHeader>
-        <CardTitle>{school.school_name}</CardTitle>
+        <CardTitle className="text-center">{school.school_name}</CardTitle>
         <CardDescription className="flex flex-col items-center">
           <p>
             {school.country} - {school.zip_code} - {school.city}

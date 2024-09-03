@@ -13,6 +13,17 @@ export const schoolSchema = z.object({
 
 export type School = z.infer<typeof schoolSchema>
 
+export const schoolSchemaOut = z.object({
+  id: z.number(),
+  school_name: z.string(),
+  city: z.string(),
+  zip_code: z.string(),
+  country: z.string(),
+  adress: z.string(),
+})
+
+export type SchoolOut = z.infer<typeof schoolSchemaOut>
+
 export const schoolSchemaIn = z.object({
   school_name: z
     .string()
