@@ -73,7 +73,7 @@ export default function ApplicationPage() {
       <h1 className="text-4xl font-semibold text-center">
         {"Choisir une école"}
       </h1>
-      <div className="flex flex-wrap gap-4 cursor-pointer">
+      <div className="flex flex-wrap gap-4 py-5 justify-center cursor-pointer">
         {userSchoolsQuery.data.map((school) => (
           <SchoolsCard key={school.id} school={school} />
         ))}
