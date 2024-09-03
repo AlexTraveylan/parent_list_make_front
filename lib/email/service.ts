@@ -8,12 +8,56 @@ import { extractAuthTokenFromLocalStorage } from "../authentification/token"
 import { EmailConfirmationToken, emailConfirmationTokenSchema } from "./schemas"
 
 class EmailService {
+  async addEmailToUser(email: string): Promise<EmailConfirmationToken> {
+    const authToken = extractAuthTokenFromLocalStorage()
+    const headers = new Headers()
+    headers.append("Authorization", authToken)
+    headers.append("Content-Type", "application/json")
+
+    try {
+      const response = await fetch(addEmailRoute, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({
+          email: email,
+        }),
+      })
+
+      if (!response.ok) {
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
+      }
+
+      const responseJson = await response.json()
+      const emailConfirmationToken =
+        emailConfirmationTokenSchema.parse(responseJson)
+
+      return emailConfirmationToken
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async confirmEmailWithToken(token: string): Promise<void> {
+    try {
+      const response = await fetch(`${addEmailRoute}${token}`, {
+        method: "GET",
+      })
+      if (!response.ok) {
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
   async sendResetPasswordRequest(username: string): Promise<void> {
     const headers = new Headers()
     headers.append("Content-Type", "application/json")
 
     try {
-      const response = await fetch(`${sendResetPasswordRequestRoute}`, {
+      const response = await fetch(sendResetPasswordRequestRoute, {
         method: "POST",
         headers: headers,
         body: JSON.stringify({
@@ -48,36 +92,6 @@ class EmailService {
         const errorMessage = await response.json()
         throw new Error(errorMessage.detail)
       }
-    } catch (error) {
-      throw error
-    }
-  }
-
-  async addEmailToUser(email: string): Promise<EmailConfirmationToken> {
-    const authToken = extractAuthTokenFromLocalStorage()
-    const headers = new Headers()
-    headers.append("Authorization", authToken)
-    headers.append("Content-Type", "application/json")
-
-    try {
-      const response = await fetch(addEmailRoute, {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify({
-          email: email,
-        }),
-      })
-
-      if (!response.ok) {
-        const errorMessage = await response.json()
-        throw new Error(errorMessage.detail)
-      }
-
-      const responseJson = await response.json()
-      const emailConfirmationToken =
-        emailConfirmationTokenSchema.parse(responseJson)
-
-      return emailConfirmationToken
     } catch (error) {
       throw error
     }
