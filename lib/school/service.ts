@@ -1,16 +1,17 @@
 import { joinSchoolRoute, schoolRoute, userSchoolRoute } from "../api-routes"
 import { extractAuthTokenFromLocalStorage } from "../authentification/token"
-import { School, schoolSchema, SchoolShemaIn } from "./schemas"
+import { School, schoolSchema, SchoolSchemaIn, schoolSchemaIn } from "./schemas"
 
 class SchoolService {
-  async getSchools(): Promise<School[]> {
+  async getUserSchools(): Promise<SchoolSchemaIn[]> {
+    const authToken = extractAuthTokenFromLocalStorage()
+    const headers = new Headers()
+    headers.append("Authorization", authToken)
+
     try {
-      const response = await fetch(schoolRoute, {
+      const response = await fetch(userSchoolRoute, {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+        headers: headers,
       })
 
       if (!response.ok) {
@@ -19,7 +20,7 @@ class SchoolService {
       }
 
       const responseJson = await response.json()
-      const schools = schoolSchema.array().parse(responseJson)
+      const schools = schoolSchemaIn.array().parse(responseJson)
 
       return schools
     } catch (error) {
@@ -27,9 +28,9 @@ class SchoolService {
     }
   }
 
-  async getSchoolById(schoolId: number): Promise<School> {
+  async getSchoolBySchoolCode(schoolCode: string): Promise<School> {
     try {
-      const response = await fetch(`${schoolRoute}${schoolId}`, {
+      const response = await fetch(`${schoolRoute}${schoolCode}`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -50,7 +51,7 @@ class SchoolService {
     }
   }
 
-  async createSchool(school: SchoolShemaIn): Promise<School> {
+  async createSchool(school: SchoolSchemaIn): Promise<SchoolSchemaIn> {
     const authToken = extractAuthTokenFromLocalStorage()
     const headers = new Headers()
     headers.append("Authorization", authToken)
@@ -69,7 +70,7 @@ class SchoolService {
       }
 
       const responseJson = await response.json()
-      const createdSchool = schoolSchema.parse(responseJson)
+      const createdSchool = schoolSchemaIn.parse(responseJson)
 
       return createdSchool
     } catch (error) {
@@ -97,31 +98,6 @@ class SchoolService {
       const createdSchool = schoolSchema.parse(responseJson)
 
       return createdSchool
-    } catch (error) {
-      throw error
-    }
-  }
-
-  async getUserSchools(): Promise<School[]> {
-    const authToken = extractAuthTokenFromLocalStorage()
-    const headers = new Headers()
-    headers.append("Authorization", authToken)
-
-    try {
-      const response = await fetch(userSchoolRoute, {
-        method: "GET",
-        headers: headers,
-      })
-
-      if (!response.ok) {
-        const errorMessage = await response.json()
-        throw new Error(errorMessage.detail)
-      }
-
-      const responseJson = await response.json()
-      const schools = schoolSchema.array().parse(responseJson)
-
-      return schools
     } catch (error) {
       throw error
     }
