@@ -16,7 +16,7 @@ export default function ValidEmailPage({
   const queryClient = useQueryClient()
 
   const { isLoading, isError, isSuccess } = useQuery({
-    queryKey: ["confirmEmail", params.token],
+    queryKey: ["confirmEmail"],
     queryFn: () => emailService.confirmEmailWithToken(params.token),
     retry: 0,
   })
@@ -40,6 +40,8 @@ export default function ValidEmailPage({
       </div>
     )
   }
+
+  console.log(isSuccess, isError, isLoading) // TODO: remove
 
   return (
     <div className="flex flex-col my-5 p-3 items-center justify-center gap-4">

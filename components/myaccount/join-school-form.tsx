@@ -40,7 +40,7 @@ export default function SchoolForm({
   const form = useForm<JoinSchoolSchemaIn>({
     resolver: zodResolver(joinSchoolSchemaIn),
     defaultValues: {
-      school_code: schoolCode || "",
+      school_code: schoolCode?.length === 8 ? schoolCode : "",
     },
   })
 
@@ -82,7 +82,7 @@ export default function SchoolForm({
                 <FormItem>
                   <div className="flex items-center gap-2">
                     <FormLabel>{"Code de l'école"}</FormLabel>
-                    {schoolCode !== undefined && (
+                    {schoolCode?.length === 8 && (
                       <>
                         <Check size={18} className="text-green-600" />
                         <span className="text-sm text-muted-foreground">
@@ -93,7 +93,7 @@ export default function SchoolForm({
                   </div>
                   <FormControl>
                     <Input
-                      disabled={schoolCode !== undefined}
+                      disabled={schoolCode?.length === 8}
                       placeholder={createRandomInvitationCode()}
                       {...field}
                     />

@@ -22,7 +22,7 @@ export const Header = () => {
   }, [])
 
   return (
-    <header className="flex flex-wrap gap-2 justify-evenly py-2">
+    <header className="flex flex-wrap gap-5 justify-evenly py-2">
       <NavigationMenu>
         <NavigationMenuList>
           {Object.values(navItems)
@@ -42,14 +42,16 @@ export const Header = () => {
             })}
         </NavigationMenuList>
       </NavigationMenu>
-      <div className="flex gap-5 items-center justify-center">
+      <div className="flex max-w-max flex-1 flex-wrap items-center justify-center gap-3">
         {userMe && (
           <span className="text-muted-foreground">
             {"Bienvenue"} {userMe.username}
           </span>
         )}
-        <AuthButton />
-        <ModeToggle />
+        <div className="flex gap-3 items-center justify-center">
+          <AuthButton />
+          <ModeToggle />
+        </div>
       </div>
     </header>
   )

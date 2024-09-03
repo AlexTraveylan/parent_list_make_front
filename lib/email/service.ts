@@ -38,7 +38,7 @@ class EmailService {
     }
   }
 
-  async confirmEmailWithToken(token: string): Promise<void> {
+  async confirmEmailWithToken(token: string): Promise<boolean> {
     try {
       const response = await fetch(`${addEmailRoute}${token}`, {
         method: "GET",
@@ -47,6 +47,7 @@ class EmailService {
         const errorMessage = await response.json()
         throw new Error(errorMessage.detail)
       }
+      return true
     } catch (error) {
       throw error
     }

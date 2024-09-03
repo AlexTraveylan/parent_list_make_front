@@ -42,8 +42,15 @@ const UserInfoForm: React.FC = () => {
     mutationFn: userInformationService.createUserInfo,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userInfo"] })
+      queryClient.invalidateQueries({ queryKey: ["userMeDetails"] })
       queryClient.refetchQueries({ queryKey: ["userInfo"] })
+      queryClient.refetchQueries({ queryKey: ["userMeDetails"] })
       toast.success("Informations enregistrées avec succès")
+      if (form.getValues().email !== "") {
+        toast.info(
+          "Un email a été envoyé, vérifiez votre boite mail pour le valider."
+        )
+      }
     },
     onError: (error) => {
       toast.error(String(error))

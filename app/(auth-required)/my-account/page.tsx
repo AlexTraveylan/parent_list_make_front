@@ -15,7 +15,7 @@ function MyAccount() {
       <h1 className="text-4xl font-semibold text-center">Mon compte</h1>
       <UserInfoSubPage />
       <EmailSubPage />
-      <SchoolsSubPage code={code || undefined} />
+      {code ? <SchoolsSubPage code={code} /> : <SchoolsSubPage />}
     </div>
   )
 }

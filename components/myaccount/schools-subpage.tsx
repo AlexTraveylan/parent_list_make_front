@@ -20,6 +20,7 @@ export function SchoolsSubPage({ code }: { code?: string }) {
     queryKey: ["userSchools"],
     queryFn: schoolService.getUserSchools,
     retry: 0,
+    refetchOnMount: "always",
   })
 
   if (query.isLoading) {

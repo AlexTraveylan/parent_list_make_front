@@ -32,13 +32,17 @@ export function EmailSubPage() {
   return (
     <div>
       <Separator />
-      <Warningtional phrase={"Aucun email confirmé enregistré (facultatif)"} />
+      <Warningtional
+        phrase={
+          "Aucun email confirmé pour le moment (facultatif) - Regardez vos emails"
+        }
+      />
       <div className="flex justify-end mt-2">
         <Link
           href={navItems["MyAccount"].href + "/confirm-email"}
           className="text-sm text-foreground/80 hover:text-foreground"
         >
-          {"Changer d'avis et confirmer son email"}
+          {"Envoyer une nouvelle demande de confirmation d'email"}
         </Link>
       </div>
     </div>

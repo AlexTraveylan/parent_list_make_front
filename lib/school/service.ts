@@ -85,7 +85,7 @@ class SchoolService {
     }
   }
 
-  async joinSchool(schoolCode: string): Promise<School> {
+  async joinSchool(schoolCode: string): Promise<void> {
     const authToken = extractAuthTokenFromLocalStorage()
     const headers = new Headers()
     headers.append("Authorization", authToken)
@@ -100,11 +100,6 @@ class SchoolService {
         const errorMessage = await response.json()
         throw new Error(errorMessage.detail)
       }
-
-      const responseJson = await response.json()
-      const createdSchool = schoolSchema.parse(responseJson)
-
-      return createdSchool
     } catch (error) {
       throw error
     }
