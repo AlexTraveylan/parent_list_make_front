@@ -4,19 +4,29 @@ import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { emailService } from "@/lib/email/service"
 import { navItems } from "@/lib/navigation"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import Link from "next/link"
+import { useEffect } from "react"
 
 export default function ValidEmailPage({
   params,
 }: {
   params: { token: string }
 }) {
+  const queryClient = useQueryClient()
+
   const { isLoading, isError, isSuccess } = useQuery({
     queryKey: ["confirmEmail", params.token],
     queryFn: () => emailService.confirmEmailWithToken(params.token),
     retry: 0,
   })
+
+  useEffect(() => {
+    if (isSuccess) {
+      queryClient.invalidateQueries({ queryKey: ["userMeDetails"] })
+      queryClient.refetchQueries({ queryKey: ["userMeDetails"] })
+    }
+  }, [isSuccess])
 
   if (isLoading) {
     return (
@@ -25,7 +35,7 @@ export default function ValidEmailPage({
 
         <div className="flex gap-4">
           <Skeleton className="h-10 w-[80px]" />
-          <Skeleton className="h-10 w-[120px]" />
+          <Skeleton className="h-10 w-[1px]" />
         </div>
       </div>
     )
