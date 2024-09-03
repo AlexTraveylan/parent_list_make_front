@@ -3,6 +3,7 @@ import {
   getConfirmedParentsRoute,
   getWaitingParentsRoute,
   makeAdminRoute,
+  transferListProprietyRoute,
   upParentRoute,
 } from "../api-routes"
 import { extractAuthTokenFromLocalStorage } from "../authentification/token"
@@ -125,6 +126,32 @@ class LinksService {
     try {
       const response = await fetch(
         `${makeAdminRoute}${parentListId}/${userId}`,
+        {
+          method: "PATCH",
+          headers: headers,
+        }
+      )
+
+      if (!response.ok) {
+        const errorMessage = await response.json()
+        throw new Error(errorMessage.detail)
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async transferListPropriety(
+    listToTransferId: number,
+    targetUserId: number
+  ): Promise<void> {
+    const authToken = extractAuthTokenFromLocalStorage()
+    const headers = new Headers()
+    headers.append("Authorization", authToken)
+
+    try {
+      const response = await fetch(
+        `${transferListProprietyRoute}${listToTransferId}/${targetUserId}`,
         {
           method: "PATCH",
           headers: headers,
