@@ -4,8 +4,9 @@ import { EmailSubPage } from "@/components/myaccount/email-subpage"
 import { SchoolsSubPage } from "@/components/myaccount/schools-subpage"
 import { UserInfoSubPage } from "@/components/myaccount/user-info-subpage"
 import { useSearchParams } from "next/navigation"
+import { Suspense } from "react"
 
-export default function MyAccountPage() {
+function MyAccount() {
   const searchParams = useSearchParams()
   const code = searchParams.get("code")
 
@@ -16,5 +17,13 @@ export default function MyAccountPage() {
       <EmailSubPage />
       <SchoolsSubPage code={code || undefined} />
     </div>
+  )
+}
+
+export default function MyAccountPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <MyAccount />
+    </Suspense>
   )
 }

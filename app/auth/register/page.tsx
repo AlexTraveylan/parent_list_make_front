@@ -25,10 +25,11 @@ import { useUserMeStore } from "@/lib/authentification/store"
 import { authNavItems, navItems } from "@/lib/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter, useSearchParams } from "next/navigation"
+import { Suspense } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
-export default function RegisterPage() {
+function RegisterForm() {
   const searchParams = useSearchParams()
   const code = searchParams.get("code")
 
@@ -126,5 +127,13 @@ export default function RegisterPage() {
         </CardContent>
       </Card>
     </>
+  )
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RegisterForm />
+    </Suspense>
   )
 }
