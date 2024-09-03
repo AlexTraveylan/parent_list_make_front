@@ -19,7 +19,12 @@ export const parentListSchemaIn = z.object({
     .number()
     .min(5, { message: "La longueur doit être supérieure à 5" })
     .max(15, { message: "La longueur doit être inférieure à 15" }),
-  school_id: z.number(),
+  school_code: z
+    .string()
+    .refine((value) => value.length === 8 && /^[A-Z0-9]+$/.test(value), {
+      message:
+        "Le code doit comporter 8 caractères, composé uniquement de lettres majuscules et de chiffres.",
+    }),
 })
 
 export type ParentListShemaIn = z.infer<typeof parentListSchemaIn>
