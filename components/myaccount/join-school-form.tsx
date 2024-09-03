@@ -4,39 +4,46 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { Skeleton } from "@/components/ui/skeleton"
+  createRandomInvitationCode,
+  joinSchoolSchemaIn,
+  JoinSchoolSchemaIn,
+} from "@/lib/school/schemas"
 import { schoolService } from "@/lib/school/service"
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-
-interface FormData {
-  selectedSchool: string
-}
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card"
+import { Input } from "../ui/input"
 
 export default function SchoolForm({
+  schoolCode,
   setIsJoinFormOpen,
 }: {
+  schoolCode?: string
   setIsJoinFormOpen: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  const form = useForm<FormData>()
-  const queryClient = useQueryClient()
-
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["schools"],
-    queryFn: schoolService.getSchools,
+  const form = useForm<JoinSchoolSchemaIn>({
+    resolver: zodResolver(joinSchoolSchemaIn),
+    defaultValues: {
+      school_code: schoolCode || "",
+    },
   })
+
+  const queryClient = useQueryClient()
 
   const createSchoolMutation = useMutation({
     mutationFn: schoolService.joinSchool,
@@ -52,50 +59,46 @@ export default function SchoolForm({
     },
   })
 
-  const onSubmit = (data: FormData) => {
-    createSchoolMutation.mutate(parseInt(data.selectedSchool))
-  }
-
-  if (isLoading) {
-    return <Skeleton className="h-[200px]" />
-  }
-
-  if (isError) {
-    return <div>Erreur</div>
-  }
-
-  if (!data) {
-    return <div>Aucune école existante</div>
+  const onSubmit = (data: JoinSchoolSchemaIn) => {
+    createSchoolMutation.mutate(data.school_code)
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="selectedSchool"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>École</FormLabel>
-              <Select onValueChange={field.onChange}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Sélectionnez une école" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {data.map((school) => (
-                    <SelectItem key={school.id} value={school.id.toString()}>
-                      {school.school_name} - {school.city} - {school.zip_code}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Valider</Button>
-      </form>
-    </Form>
+    <Card>
+      <CardHeader>
+        <CardTitle>{"Formulaire pour rejoindre une école"}</CardTitle>
+        <CardDescription>
+          {"Rejoins l'espace de ton école à l'aide de son code sécurisé"}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="school_code"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{"Code de l'école"}</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder={createRandomInvitationCode()}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    {
+                      "C'est le code qui vous a été envoyé par l'école, si vous venez par le lien, il devrait être déjà renseigné."
+                    }
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit">Valider</Button>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
   )
 }

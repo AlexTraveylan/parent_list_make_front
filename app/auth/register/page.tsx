@@ -24,11 +24,14 @@ import { authService } from "@/lib/authentification/service"
 import { useUserMeStore } from "@/lib/authentification/store"
 import { authNavItems, navItems } from "@/lib/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 export default function RegisterPage() {
+  const searchParams = useSearchParams()
+  const code = searchParams.get("code")
+
   const { fetchUserMe } = useUserMeStore()
   const router = useRouter()
 
@@ -46,7 +49,7 @@ export default function RegisterPage() {
       localStorage.setItem("auth_token", token.access_token)
       fetchUserMe()
       toast.success("Compte créé avec succès")
-      router.push(navItems["MyAccount"].href)
+      router.push(`${navItems["MyAccount"].href}?code=${code}`)
     } catch (error) {
       toast.error(String(error))
     }

@@ -3,7 +3,7 @@ import { extractAuthTokenFromLocalStorage } from "../authentification/token"
 import { School, schoolSchema, SchoolSchemaIn, schoolSchemaIn } from "./schemas"
 
 class SchoolService {
-  async getUserSchools(): Promise<SchoolSchemaIn[]> {
+  async getUserSchools(): Promise<School[]> {
     const authToken = extractAuthTokenFromLocalStorage()
     const headers = new Headers()
     headers.append("Authorization", authToken)
@@ -20,7 +20,7 @@ class SchoolService {
       }
 
       const responseJson = await response.json()
-      const schools = schoolSchemaIn.array().parse(responseJson)
+      const schools = schoolSchema.array().parse(responseJson)
 
       return schools
     } catch (error) {
@@ -78,13 +78,13 @@ class SchoolService {
     }
   }
 
-  async joinSchool(schoolId: number): Promise<School> {
+  async joinSchool(schoolCode: string): Promise<School> {
     const authToken = extractAuthTokenFromLocalStorage()
     const headers = new Headers()
     headers.append("Authorization", authToken)
 
     try {
-      const response = await fetch(`${joinSchoolRoute}${schoolId}`, {
+      const response = await fetch(`${joinSchoolRoute}${schoolCode}`, {
         method: "GET",
         headers: headers,
       })

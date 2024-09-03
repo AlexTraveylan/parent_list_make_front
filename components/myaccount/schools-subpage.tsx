@@ -18,7 +18,7 @@ import { Skeleton } from "../ui/skeleton"
 import { Completion, Incompletion } from "./completion-incompletion"
 import { SchoolsCard } from "./schools-card"
 
-export function SchoolsSubPage() {
+export function SchoolsSubPage({ code }: { code?: string }) {
   const [isJoinFormOpen, setIsJoinFormOpen] = useState(false)
   const [isCreatingFormOpen, setIsCreatingFormOpen] = useState(false)
 
@@ -81,7 +81,10 @@ export function SchoolsSubPage() {
         </CardContent>
         <CardFooter>
           {isJoinFormOpen && (
-            <SchoolForm setIsJoinFormOpen={setIsJoinFormOpen} />
+            <SchoolForm
+              schoolCode={code}
+              setIsJoinFormOpen={setIsJoinFormOpen}
+            />
           )}
         </CardFooter>
       </Card>

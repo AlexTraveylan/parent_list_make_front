@@ -30,10 +30,10 @@ import {
 } from "../ui/card"
 
 export default function ParentListForm({
-  school_id,
+  school_code,
   setIsCreatingFormOpen,
 }: {
-  school_id: number
+  school_code: string
   setIsCreatingFormOpen: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const queryClient = useQueryClient()
@@ -43,7 +43,7 @@ export default function ParentListForm({
     defaultValues: {
       list_name: "",
       holder_length: 10,
-      school_id: school_id,
+      school_code: school_code,
     },
   })
 

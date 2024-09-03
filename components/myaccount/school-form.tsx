@@ -18,7 +18,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { SchoolShemaIn, schoolShemaIn } from "@/lib/school/schemas"
+import {
+  createRandomInvitationCode,
+  schoolSchemaIn,
+  SchoolSchemaIn,
+} from "@/lib/school/schemas"
 import { schoolService } from "@/lib/school/service"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
@@ -41,8 +45,8 @@ export function CreateSchoolForm({
   const queryClient = useQueryClient()
   const [isLoading, setIsLoading] = useState(false)
 
-  const form = useForm<SchoolShemaIn>({
-    resolver: zodResolver(schoolShemaIn),
+  const form = useForm<SchoolSchemaIn>({
+    resolver: zodResolver(schoolSchemaIn),
     defaultValues: {
       school_name: "",
       city: "",
@@ -50,6 +54,7 @@ export function CreateSchoolForm({
       country: "",
       adress: "",
       school_relation: "parent",
+      code: createRandomInvitationCode(),
     },
   })
 
@@ -72,7 +77,7 @@ export function CreateSchoolForm({
     },
   })
 
-  const onSubmit = async (data: SchoolShemaIn) => {
+  const onSubmit = async (data: SchoolSchemaIn) => {
     setIsLoading(true)
     try {
       await createSchoolMutation.mutateAsync(data)

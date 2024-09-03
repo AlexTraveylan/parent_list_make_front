@@ -7,6 +7,8 @@ export const schoolSchema = z.object({
   zip_code: z.string(),
   country: z.string(),
   adress: z.string(),
+  school_relation: z.enum(["parent", "direction"]),
+  code: z.string(),
 })
 
 export type School = z.infer<typeof schoolSchema>
@@ -44,3 +46,22 @@ export const schoolSchemaIn = z.object({
 })
 
 export type SchoolSchemaIn = z.infer<typeof schoolSchemaIn>
+
+export const joinSchoolSchemaIn = z.object({
+  school_code: z
+    .string()
+    .refine((value) => value.length === 8 && /^[A-Z0-9]+$/.test(value), {
+      message:
+        "Le code doit comporter 8 caractères, composé uniquement de lettres majuscules et de chiffres.",
+    }),
+})
+
+export type JoinSchoolSchemaIn = z.infer<typeof joinSchoolSchemaIn>
+
+export function createRandomInvitationCode(): string {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+  return Array.from(
+    { length: 8 },
+    () => characters[Math.floor(Math.random() * characters.length)]
+  ).join("")
+}

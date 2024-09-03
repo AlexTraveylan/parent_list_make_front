@@ -13,7 +13,7 @@ import { useState } from "react"
 export default function SchoolListPage({
   params,
 }: {
-  params: { school_id: string }
+  params: { school_code: string }
 }) {
   const [isCreatingFormOpen, setIsCreatingFormOpen] = useState(false)
 
@@ -25,14 +25,13 @@ export default function SchoolListPage({
 
   const parentsListsQuery = useQuery({
     queryKey: ["userParentLists"],
-    queryFn: () =>
-      parentListService.parentsListsBySchoolId(parseInt(params.school_id)),
+    queryFn: () => parentListService.parentsListsBySchoolId(params.school_code),
     retry: 0,
   })
 
   const schoolQuery = useQuery({
-    queryKey: ["school", params.school_id],
-    queryFn: () => schoolService.getSchoolById(parseInt(params.school_id)),
+    queryKey: ["school", params.school_code],
+    queryFn: () => schoolService.getSchoolBySchoolCode(params.school_code),
     retry: 0,
   })
 
@@ -56,7 +55,7 @@ export default function SchoolListPage({
     return null
   }
 
-  if (!query.data.school_ids.includes(parseInt(params.school_id))) {
+  if (!query.data.school_ids.includes(schoolQuery.data.id)) {
     return null
   }
 
@@ -94,7 +93,7 @@ export default function SchoolListPage({
       </button>
       {isCreatingFormOpen && (
         <ParentListForm
-          school_id={schoolQuery.data.id}
+          school_code={params.school_code}
           setIsCreatingFormOpen={setIsCreatingFormOpen}
         />
       )}
