@@ -41,20 +41,21 @@ export default function Home() {
   return (
     <div className="container mx-auto px-4 py-16">
       <h1 className="text-4xl font-bold text-center mb-8">
-        Parents List Maker
+        {"Parents List Maker"}
       </h1>
 
       <p className="text-xl text-center mb-12">
-        Création collaborative de listes de parents d'élèves pour les élections
-        de représentants
+        {
+          "Création collaborative de listes de parents d'élèves pour les élections de représentants"
+        }
       </p>
 
       <div className="flex justify-center mb-16">
         <Button size="lg" className="mr-4">
-          Commencer gratuitement
+          {"Commencer, c'est totalement gratuit !"}
         </Button>
         <Button size="lg" variant="outline">
-          En savoir plus
+          {"En savoir plus"}
         </Button>
       </div>
 
