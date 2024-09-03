@@ -6,13 +6,7 @@ import { schoolService } from "@/lib/school/service"
 import { useQuery } from "@tanstack/react-query"
 import { useState } from "react"
 import { Button } from "../ui/button"
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 import { Separator } from "../ui/separator"
 import { Skeleton } from "../ui/skeleton"
 import { Completion, Incompletion } from "./completion-incompletion"
@@ -79,15 +73,10 @@ export function SchoolsSubPage({ code }: { code?: string }) {
             </Button>
           )}
         </CardContent>
-        <CardFooter>
-          {isJoinFormOpen && (
-            <SchoolForm
-              schoolCode={code}
-              setIsJoinFormOpen={setIsJoinFormOpen}
-            />
-          )}
-        </CardFooter>
       </Card>
+      {isJoinFormOpen && (
+        <SchoolForm schoolCode={code} setIsJoinFormOpen={setIsJoinFormOpen} />
+      )}
       {isCreatingFormOpen && (
         <CreateSchoolForm setIsCreatingFormOpen={setIsCreatingFormOpen} />
       )}

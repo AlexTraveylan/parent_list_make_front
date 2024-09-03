@@ -1,7 +1,14 @@
+// Backend URL
 const url =
   process.env.NODE_ENV === "production"
     ? "https://parentslistmaker.up.railway.app"
     : "http://localhost:8000"
+
+// Frontend URL
+export const frontendUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://parentslistsmaker.vercel.app"
+    : "http://localhost:3000"
 
 // Auth routes
 export const loginRoute = url + "/token"

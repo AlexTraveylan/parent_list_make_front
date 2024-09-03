@@ -18,6 +18,7 @@ import {
 import { schoolService } from "@/lib/school/service"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { Check } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import {
@@ -79,16 +80,27 @@ export default function SchoolForm({
               name="school_code"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{"Code de l'école"}</FormLabel>
+                  <div className="flex items-center gap-2">
+                    <FormLabel>{"Code de l'école"}</FormLabel>
+                    {schoolCode !== undefined && (
+                      <>
+                        <Check size={18} className="text-green-600" />
+                        <span className="text-sm text-muted-foreground">
+                          {"Code trouvé d'une invitation"}
+                        </span>
+                      </>
+                    )}
+                  </div>
                   <FormControl>
                     <Input
+                      disabled={schoolCode !== undefined}
                       placeholder={createRandomInvitationCode()}
                       {...field}
                     />
                   </FormControl>
                   <FormDescription>
                     {
-                      "C'est le code qui vous a été envoyé par l'école, si vous venez par le lien, il devrait être déjà renseigné."
+                      "C'est le code qui vous a été envoyé par l'école, si vous venez par le lien, il devrait être déjà renseigné et verouillé."
                     }
                   </FormDescription>
                   <FormMessage />
