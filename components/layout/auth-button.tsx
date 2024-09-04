@@ -8,7 +8,7 @@ import Link from "next/link"
 export const AuthButton = () => {
   const { userMe, cleanUserMe } = useUserMeStore()
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     localStorage.removeItem("auth_token")
     cleanUserMe()
   }
