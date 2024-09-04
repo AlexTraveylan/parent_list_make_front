@@ -59,21 +59,7 @@ export default function Home() {
         </Button>
       </div>
 
-      <div className="mb-16">
-        <iframe
-          width="800"
-          height="700"
-          src="https://www.youtube.com/embed/NLCa8HSx0Co?autoplay=1"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; muted"
-          allowFullScreen
-          className="w-full"
-        >
-          {"Your browser does not support the video tag."}
-        </iframe>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-16">
         {features.map((item, index) => (
           <div
             key={index}
@@ -96,6 +82,20 @@ export default function Home() {
             </div>
           </div>
         ))}
+      </div>
+
+      <div>
+        <iframe
+          width="800"
+          height="700"
+          src="https://www.youtube.com/embed/NLCa8HSx0Co?autoplay=1"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; muted"
+          allowFullScreen
+          className="w-full"
+        >
+          {"Your browser does not support the video tag."}
+        </iframe>
       </div>
     </div>
   )
