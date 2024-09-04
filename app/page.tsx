@@ -60,15 +60,17 @@ export default function Home() {
       </div>
 
       <div className="mb-16">
-        <video
-          src="/demo-video.mp4"
-          controls
+        <iframe
           width="800"
-          height="400"
+          height="700"
+          src="https://www.youtube.com/embed/NLCa8HSx0Co?autoplay=1"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; muted"
+          allowFullScreen
           className="w-full"
         >
-          Your browser does not support the video tag.
-        </video>
+          {"Your browser does not support the video tag."}
+        </iframe>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
