@@ -44,7 +44,7 @@ export const SchoolsCard = ({ school }: { school: School }) => {
       </CardContent>
       <CardFooter className="flex flex-col items-start gap-2">
         <div className="flex justify-between items-center w-full">
-          <div className="text-sm">Code : {school.code}</div>
+          <div className="text-sm">{`Code : ${school.code}`}</div>
           <Button
             variant="ghost"
             size="icon"
@@ -56,7 +56,7 @@ export const SchoolsCard = ({ school }: { school: School }) => {
         </div>
         <div className="flex justify-between items-center w-full">
           <div className="text-sm truncate" style={{ maxWidth: "200px" }}>
-            Lien d'invitation : {invitationLink}
+            {`Lien d'invitation : ${invitationLink}`}
           </div>
           <Button
             variant="ghost"
