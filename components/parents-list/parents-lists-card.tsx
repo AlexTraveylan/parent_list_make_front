@@ -34,6 +34,7 @@ import { useUserMeStore } from "@/lib/authentification/store"
 import { linksService } from "@/lib/links-service.ts/service"
 import { Message, messageSchema, ParentList } from "@/lib/parents-list/schemas"
 import { parentListService } from "@/lib/parents-list/service"
+import { SchoolOut } from "@/lib/school/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { LogOut, Merge } from "lucide-react"
@@ -50,13 +51,16 @@ import {
 import { Separator } from "../ui/separator"
 import { Skeleton } from "../ui/skeleton"
 import { Textarea } from "../ui/textarea"
+import DownloadParentListPDF from "./download-to-pdf"
 import ParentDetails from "./parent-details"
 import { WaitingParentDetails } from "./waiting-parent-details"
 
 export default function ParentsListsCard({
   parentList,
+  school,
 }: {
   parentList: ParentList
+  school: SchoolOut
 }) {
   const queryClient = useQueryClient()
   const { userMe } = useUserMeStore()
@@ -159,7 +163,14 @@ export default function ParentsListsCard({
   return (
     <Card className="max-w-sm">
       <CardHeader>
-        <CardTitle>{parentList.list_name}</CardTitle>
+        <CardTitle className="flex justify-between items-center">
+          <h2>{parentList.list_name}</h2>
+          <DownloadParentListPDF
+            list={parentList}
+            school={school}
+            parents={confirmedParents.data ?? []}
+          />
+        </CardTitle>
         <CardDescription>
           {`${parentList.holder_length} titulaires - ${parentList.holder_length} suppléants`}
         </CardDescription>

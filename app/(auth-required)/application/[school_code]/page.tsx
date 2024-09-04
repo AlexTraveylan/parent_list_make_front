@@ -73,7 +73,11 @@ export default function SchoolListPage({
       <div className="flex flex-wrap justify-center gap-4">
         {parentsListsQuery.data.map((parentList) => {
           return (
-            <ParentsListsCard key={parentList.id} parentList={parentList} />
+            <ParentsListsCard
+              key={parentList.id}
+              parentList={parentList}
+              school={schoolQuery.data}
+            />
           )
         })}
       </div>
