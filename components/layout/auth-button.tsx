@@ -4,20 +4,21 @@ import { Button } from "@/components/ui/button"
 import { useUserMeStore } from "@/lib/authentification/store"
 import { authNavItems, navItems } from "@/lib/navigation"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 
 export const AuthButton = () => {
   const { userMe, cleanUserMe } = useUserMeStore()
-  const router = useRouter()
 
   const handleLogout = async () => {
-    router.push(navItems["Home"].href)
     localStorage.removeItem("auth_token")
     cleanUserMe()
   }
 
   if (userMe !== null) {
-    return <Button onClick={handleLogout}>{"Déconnexion"}</Button>
+    return (
+      <Button onClick={handleLogout} asChild>
+        <Link href={navItems["Home"].href}>{"Déconnexion"}</Link>
+      </Button>
+    )
   }
 
   return (
