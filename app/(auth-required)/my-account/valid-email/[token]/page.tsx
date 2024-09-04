@@ -47,11 +47,13 @@ export default function ValidEmailPage({
     <div className="flex flex-col my-5 p-3 items-center justify-center gap-4">
       {isError && (
         <p className="text-center">
-          La validation de l'email a échoué. Veuillez réessayer.
+          {"La validation de l'email a échoué. Veuillez réessayer."}
         </p>
       )}
       {isSuccess && (
-        <p className="text-center">Votre email a été validé avec succès !</p>
+        <p className="text-center">
+          {"Votre email a été validé avec succès !"}
+        </p>
       )}
 
       <div className="flex gap-4">
