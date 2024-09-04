@@ -19,7 +19,7 @@ export const Header = () => {
 
   useEffect(() => {
     fetchUserMe()
-  }, [])
+  }, [fetchUserMe])
 
   return (
     <header className="flex flex-wrap gap-5 justify-evenly py-2">
