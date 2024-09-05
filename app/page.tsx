@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button"
+import { authNavItems } from "@/lib/navigation"
 import Image from "next/image"
+import Link from "next/link"
 
 type Feature = {
   title: string
@@ -50,12 +52,14 @@ export default function Home() {
         }
       </p>
 
-      <div className="flex justify-center mb-16">
-        <Button size="lg" className="mr-4">
-          {"Commencer, c'est totalement gratuit !"}
+      <div className="flex flex-wrap justify-center mb-16 gap-5">
+        <Button size="lg" asChild>
+          <Link href={authNavItems["register"].href}>
+            {"Commencer, c'est totalement gratuit !"}
+          </Link>
         </Button>
-        <Button size="lg" variant="outline">
-          {"En savoir plus"}
+        <Button size="lg" variant="outline" asChild>
+          <Link href={"/about"}>{"En savoir plus"}</Link>
         </Button>
       </div>
 
