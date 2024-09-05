@@ -5,7 +5,6 @@ import {
   SchoolOut,
   schoolSchema,
   SchoolSchemaIn,
-  schoolSchemaIn,
   schoolSchemaOut,
 } from "./schemas"
 
@@ -58,7 +57,7 @@ class SchoolService {
     }
   }
 
-  async createSchool(school: SchoolSchemaIn): Promise<SchoolSchemaIn> {
+  async createSchool(school: SchoolSchemaIn): Promise<void> {
     const authToken = extractAuthTokenFromLocalStorage()
     const headers = new Headers()
     headers.append("Authorization", authToken)
@@ -75,11 +74,6 @@ class SchoolService {
         const errorMessage = await response.json()
         throw new Error(errorMessage.detail)
       }
-
-      const responseJson = await response.json()
-      const createdSchool = schoolSchemaIn.parse(responseJson)
-
-      return createdSchool
     } catch (error) {
       throw error
     }
