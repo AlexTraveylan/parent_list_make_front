@@ -92,9 +92,9 @@ export default function Home() {
         <iframe
           width="800"
           height="700"
-          src="https://www.youtube.com/embed/NLCa8HSx0Co?autoplay=1"
+          src="https://www.youtube.com/embed/NLCa8HSx0Co?autoplay=1&mute=1"
           title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; muted"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           className="w-full"
         >
